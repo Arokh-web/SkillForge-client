@@ -1,0 +1,52 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# .env files
+.env
+.env.*  # falls du mehrere env-Files hast wie .env.development
+
+# Build output
+build/
+public/build/
+coverage/          # falls du Tests einführst (z. B. Jest)
+*.tsbuildinfo      # bei späterem TypeScript-Einsatz
+
+# OS-specific
+Thumbs.db
+ehthumbs.db
+
+# Express uploads (falls du multer nutzt)
+uploads/
+tmp/
+
+# Vite cache
+.vite/
+
+# Tailwind JIT cache (optional, falls du mit Plugins arbeitest)
+.tailwindcache/
+
+# PostgreSQL local files (nur falls du Dumps/Backups im Projektordner speicherst)
+*.dump
+*.sql
