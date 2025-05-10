@@ -25,28 +25,28 @@ dist-ssr
 
 # .env files
 .env
-.env.*  # falls du mehrere env-Files hast wie .env.development
+.env.*  
 
 # Build output
 build/
 public/build/
-coverage/          # falls du Tests einführst (z. B. Jest)
-*.tsbuildinfo      # bei späterem TypeScript-Einsatz
+coverage/          
+*.tsbuildinfo      
 
 # OS-specific
 Thumbs.db
 ehthumbs.db
 
-# Express uploads (falls du multer nutzt)
+# Express uploads 
 uploads/
 tmp/
 
 # Vite cache
 .vite/
 
-# Tailwind JIT cache (optional, falls du mit Plugins arbeitest)
+# Tailwind JIT cache 
 .tailwindcache/
 
-# PostgreSQL local files (nur falls du Dumps/Backups im Projektordner speicherst)
+# PostgreSQL local files 
 *.dump
 *.sql
