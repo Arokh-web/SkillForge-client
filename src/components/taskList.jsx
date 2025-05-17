@@ -1,4 +1,4 @@
-// this is the task-list, dependend on the selected project from the project-dropdown; it exists in the left side bar
+// this is the task-list on the left, dependend on the selected project from the project-dropdown; it exists in the left side bar
 
 import React from "react";
 

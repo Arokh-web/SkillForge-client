@@ -1,1 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Island+Moments&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-bar-bg: #cfb77d;
+  --color-textMain: #26353b;
+  --color-logout: rgba(255, 0, 0, 0.5);
+  --color-account: #bbff00;
+  --color-sidebarBg: #26353b;
+  --color-taskBar: #6f97a2;
+  --color-projectsDropdown: #b75c5c;
+  --color-dashboardBg: #f9e5c5;
+  --font-family-logo: "Island Moments", cursive;
+}
+
+/* Main page behaviour */
+:root {
+  @apply p-5 m-5;
+}
+
+/* Basic header styles and basic footer styles come here */
+/* HEADER */
+/* Container contains everything in the HEADER */
+.header-container {
+  @apply flex gap-2 text-[var(--color-textMain)];
+  font-family: var(--font-family-logo);
+  font-size: 2rem;
+}
+
+/* Logo container contains only the logo */
+.logo-container {
+  @apply flex;
+}
+
+.logo {
+  @apply w-20 h-20 rounded-4xl;
+}
+
+/* Header Content contains the menubar */
+.header-content {
+  @apply flex bg-[var(--color-bar-bg)] w-full rounded-4xl p-5 max-w-3/4;
+}
+
+/* menubar contains title and header-buttons-container */
+.menubar {
+  @apply flex items-center justify-between w-full;
+}
+
+.title {
+  @apply flex text-4xl;
+}
+
+.header-buttons {
+  @apply flex gap-2 items-end;
+}
+
+.dark-mode-button {
+  @apply bg-black rounded-2xl items-center justify-center w-6 h-6;
+}
+
+.dark-mode-button:hover {
+  @apply bg-[var(--color-bar-bg)];
+}
+
+.logout-button {
+  @apply flex bg-[var(--color-logout)] rounded-4xl w-6 h-6 text-sm text-center items-center justify-center;
+}
+
+.logout-button:hover {
+  @apply bg-red-500;
+}
+
+.account-button {
+  @apply flex bg-[var(--color-account)]  rounded-4xl w-12 h-12 text-center items-center justify-center;
+}
+
+.account-button:hover {
+  @apply bg-green-100;
+}
+
+/* FOOTER */
+/* Container contains everything in the FOOTER */
