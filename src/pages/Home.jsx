@@ -9,11 +9,9 @@ import SideBarLeft from "../components/SideBarLeft";
 
 const Home = () => {
   return (
-    <div>
+    <div className="home">
       <SideBarLeft />
-      <div>
-        <Hero />
-      </div>
+      <Hero />
     </div>
   );
 };

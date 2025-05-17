@@ -5,17 +5,18 @@ import Projects from "../pages/Projects";
 
 const Hero = () => {
   return (
-    <div>
-      {/* Sample Text */}
-      <h1>Welcome to SkillForge</h1>
-      <p>
-        Your one-stop solution for skill development and project management.
-      </p>
-      <button>Get Started</button>
-      <button>Learn More</button>
+    <div className="hero">
       <div>
         {/* Depending on login, content varies. initial try-out: projects-page */}
-        
+        Home-Page with SideBar and Hero (pending content)
+        {/* Sample Text */}
+        <h1>Welcome to SkillForge</h1>
+        <p>
+          Your one-stop solution for skill development and project management.
+        </p>
+        <button>Get Started</button>
+        <button>Learn More</button>
+        <div></div>
         <Projects />
       </div>
     </div>

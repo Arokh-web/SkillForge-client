@@ -1,11 +1,15 @@
 // this is the main area for the left side bar; in it is the project-dropdown and the task list (at least in dashboard-mode)
 
-import React from 'react'
+import ProjectDropDown from "./ProjectDropDown";
+import TaskList from "./TaskList";
 
 const SideBarLeft = () => {
   return (
-    <div>SideBarLeft</div>
-  )
-}
+    <div className="sidebar-left">
+      <ProjectDropDown />
+      <TaskList />
+    </div>
+  );
+};
 
-export default SideBarLeft
+export default SideBarLeft;

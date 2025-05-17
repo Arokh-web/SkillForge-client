@@ -7,9 +7,9 @@
   --color-logout: rgba(255, 0, 0, 0.5);
   --color-account: #bbff00;
   --color-sidebarBg: #26353b;
-  --color-taskBar: #6f97a2;
-  --color-projectsDropdown: #b75c5c;
-  --color-dashboardBg: #f9e5c5;
+  --color-tasklistBg: #6f97a2;
+  --color-projectDropdownBg: #b75c5c;
+  --color-heroBg: #f9e5c5;
   --font-family-logo: "Island Moments", cursive;
 }
 
@@ -22,7 +22,7 @@
 /* HEADER */
 /* Container contains everything in the HEADER */
 .header-container {
-  @apply flex gap-2 text-[var(--color-textMain)];
+  @apply flex gap-2 text-[var(--color-textMain)] max-w-3/4;
   font-family: var(--font-family-logo);
   font-size: 2rem;
 }
@@ -38,7 +38,7 @@
 
 /* Header Content contains the menubar */
 .header-content {
-  @apply flex bg-[var(--color-bar-bg)] w-full rounded-4xl p-5 max-w-3/4;
+  @apply flex bg-[var(--color-bar-bg)] w-full rounded-4xl p-5;
 }
 
 /* menubar contains title and header-buttons-container */

@@ -1,5 +1,6 @@
 // Import of styles
-import "./App.css";
+import "./styles/App.css";
+import "./styles/Home.css";
 
 // Import of pages (displayed in hero.jsx)
 import Projects from "./pages/Projects.jsx";
