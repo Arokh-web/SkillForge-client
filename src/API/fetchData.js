@@ -1,5 +1,7 @@
 import axiosConnection from "./BaseConnection";
 
+
+// General data fetch
 const fetchData = async (method, endpoint) => {
   try {
     const res = await axiosConnection({

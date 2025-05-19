@@ -1,9 +1,7 @@
-import React from 'react'
+// This component is completely optional and can be removed if not needed
 
 const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
-}
+  return <div>Footer</div>;
+};
 
-export default Footer
+export default Footer;

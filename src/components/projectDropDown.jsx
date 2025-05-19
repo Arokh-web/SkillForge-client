@@ -1,6 +1,6 @@
-// this is the project dropdown component
+// this is the project-dropdown component it only displays the projects of the signed-in user
 
-import React from "react";
+
 
 const ProjectDropDown = () => {
   return <div className="project-dropdown"></div>;

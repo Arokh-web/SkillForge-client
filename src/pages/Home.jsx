@@ -4,7 +4,7 @@
 // possible other parts: a welcome message, a description of the application, a link to the about page, a link to the contact page
 // access to admin-section is possible; use of footer more important here?
 
-import Hero from "../components/hero";
+import Hero from "../components/Hero";
 import SideBarLeft from "../components/SideBarLeft";
 
 const Home = () => {

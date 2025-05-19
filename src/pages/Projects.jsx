@@ -1,6 +1,9 @@
 // This is the main page for the Projects section of the application
 import { useEffect, useState } from "react";
 import fetchData from "../API/fetchData";
+import { createContext } from "react";
+
+const ProjectDataContext = createContext();
 
 const Projects = () => {
   // setting necessary States
