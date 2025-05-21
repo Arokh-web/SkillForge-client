@@ -7,6 +7,10 @@
 import Hero from "../components/Hero";
 import SideBarLeft from "../components/SideBarLeft";
 
+// Data Import
+import { useContext, useState } from "react";
+import { TaskContext, ProjectContext } from "../contexts/contexts";
+
 const Home = () => {
   return (
     <div className="home">

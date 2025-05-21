@@ -19,8 +19,13 @@
   --color-logout: rgba(255, 0, 0, 0.5);
   --color-account: #bbff00;
   --color-sidebarBg: #2c3e50;
+
   --color-tasklistBg: #6f97a2;
+  --color-selectedTaskBg: #b9d9e2;
+
+  --color-selectedProjectBg: #f1c181;
   --color-projectDropdownBg: #b75c5c;
+
   --color-heroBg: #f9e5c5;
   --color-mainBg: linearGradient(#f4f1ec, #f9e5c5);
   --font-family-logo: "Island Moments", cursive;

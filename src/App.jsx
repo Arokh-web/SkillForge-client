@@ -14,37 +14,51 @@ import Home from "./pages/Home.jsx";
 
 // Import of modules
 import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
+
+// Import of Contexts
+import { ProjectContext, TaskContext } from "./contexts/contexts.js";
 
 function App() {
+  // Setting of main states
+  const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [selectedProject, setSelectedProject] = useState(null);
+
   return (
     <div>
-      <Header />
-      <Routes>
-        <Route>
-          <Route path="/" element={<Home />} />
-          {/* SHOWS: The PROJECTS page shows ALL the projects of the user. 
+      <ProjectContext.Provider value={{ projects, setProjects }}>
+        <TaskContext.Provider value={{ tasks, setTasks }}>
+          <Header />
+          <Routes>
+            <Route>
+              <Route path="/" element={<Home />} />
+              {/* SHOWS: The PROJECTS page shows ALL the projects of the user. 
           POSSIBILITY: The user can add projects here. 
           WHERE: It is displayed within the hero-component with the sidebar */}
-          <Route path="/projects" element={<Projects />} />
-          {/* The task-id-component shows the edittable details of one task. adding notes is possible here. */}
-          {/* <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
+              <Route path="/projects" element={<Projects />} />
+              {/* The task-id-component shows the edittable details of one task. adding notes is possible here. */}
+              {/* <Route path="/projects/:projectId" element={<ProjectDetail />} /> */}
 
-          {/* SHOWS: The TASKS page shows ALL the tasks of the user with the corresponding project-name. 
+              {/* SHOWS: The TASKS page shows ALL the tasks of the user with the corresponding project-name. 
           POSSIBILITY: The user can add tasks here. 
           WHERE: It is displayed within the hero-component with the sidebar */}
-          <Route path="/tasks" element={<Tasks />} />
-          {/* The task-id-component shows the edittable details of one task. adding notes is possible here. */}
-          {/* <Route path="/tasks/:taskId" element={<TaskDetail />} /> */}
+              <Route path="/tasks" element={<Tasks />} />
+              {/* The task-id-component shows the edittable details of one task. adding notes is possible here. */}
+              {/* <Route path="/tasks/:taskId" element={<TaskDetail />} /> */}
 
-          {/* SHOWS: The NOTES page shows ALL the notes of the user with the TASKS and PROJECTS connected to it.
+              {/* SHOWS: The NOTES page shows ALL the notes of the user with the TASKS and PROJECTS connected to it.
           POSSIBILITY: The user can ass notes here.
           WHERE: It is displayed within the hero-component with the sidebar */}
-          <Route path="/notes" element={<Notes />} />
-          {/* The note-id-component  shows the edittable details of one note. connecting tasks is possible here. */}
-          {/* <Route path="/notes/:noteId" element={<NoteDetail />} /> */}
-        </Route>
-      </Routes>
-      <Footer />
+              <Route path="/notes" element={<Notes />} />
+              {/* The note-id-component  shows the edittable details of one note. connecting tasks is possible here. */}
+              {/* <Route path="/notes/:noteId" element={<NoteDetail />} /> */}
+            </Route>
+          </Routes>
+          <Footer />
+        </TaskContext.Provider>
+      </ProjectContext.Provider>
     </div>
   );
 }
