@@ -1,4 +1,5 @@
 // This is the upper menu bar, where the logo, the title of the current page, dark-mode-switch, logout-button and account-button exist
+import { Link } from "react-router-dom";
 
 const Header = () => {
   // const [darkMode, setDarkMode] = useState(false);
@@ -14,6 +15,9 @@ const Header = () => {
         <div className="menubar">
           <div className="title">SkillForge</div>
           <div className="header-buttons">
+            <div className="justify-left">
+              <Link to="/dashboard">Go to Dashboard (Overview)</Link>
+            </div>
             <div className="dark-mode-button"></div>
             <div className="logout-button">
               <button className="logout-btn">X</button>

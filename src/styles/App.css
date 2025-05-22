@@ -1,18 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Island+Moments&display=swap");
 @import "tailwindcss";
 
-/* @theme {
-  --color-bar-bg: #cfb77d;
-  --color-textMain: #26353b;
-  --color-logout: rgba(255, 0, 0, 0.5);
-  --color-account: #bbff00;
-  --color-sidebarBg: #26353b;
-  --color-tasklistBg: #6f97a2;
-  --color-projectDropdownBg: #b75c5c;
-  --color-heroBg: #f9e5c5;
-  --font-family-logo: "Island Moments", cursive;
-} */
-
 @theme {
   --color-bar-bg: #e0c097;
   --color-textMain: #26353b;
@@ -37,7 +25,7 @@
 
 /* Main page behaviour */
 body {
-  @apply p-5 mx-auto min-h-screen;
+  @apply p-5 mx-auto;
 }
 
 /* Basic header styles and basic footer styles come here */
@@ -51,7 +39,7 @@ body {
 
 /* Logo container contains only the logo */
 .logo-container {
-  @apply flex;
+  @apply flex  items-center justify-center;
 }
 
 .logo {
@@ -65,7 +53,7 @@ body {
 
 /* menubar contains title and header-buttons-container */
 .menubar {
-  @apply flex items-center justify-between w-full;
+  @apply flex items-center justify-between w-full max-h-10;
 }
 
 .title {

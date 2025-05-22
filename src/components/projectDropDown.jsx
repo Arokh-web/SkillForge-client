@@ -7,7 +7,7 @@ import { TaskContext, ProjectContext } from "../contexts/contexts";
 const ProjectDropDown = () => {
   // setting necessary LOCAL states
   const [loading, setLoading] = useState(true);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState("");
   // setting contexts
   const { projects, setProjects } = useContext(ProjectContext);
   const { tasks, setTasks } = useContext(TaskContext);

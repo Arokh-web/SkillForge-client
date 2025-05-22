@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .home {
-  @apply flex max-h-9/10 gap-5 mt-5;
+  @apply h-full ;
 }
 
 .sidebar-left {

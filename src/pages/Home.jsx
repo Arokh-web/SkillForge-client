@@ -6,16 +6,19 @@
 
 import Hero from "../components/Hero";
 import SideBarLeft from "../components/SideBarLeft";
-
-// Data Import
-import { useContext, useState } from "react";
-import { TaskContext, ProjectContext } from "../contexts/contexts";
+import { Outlet } from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
     <div className="home">
+      <Header />
       <SideBarLeft />
-      <Hero />
+
+      <Outlet />
+
+      <Footer />
     </div>
   );
 };
