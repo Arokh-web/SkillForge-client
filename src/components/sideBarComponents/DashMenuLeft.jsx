@@ -13,25 +13,26 @@ const DashMenuLeft = () => {
 
   return (
     <div className="side-menu">
-      Go to...
-      <p>
-        <button className="project-button" onClick={handleProjectClick}>
-          Project-List
-        </button>
-      </p>
-      <p>
-        <button className="task-and-note-button" onClick={handleTaskNoteClick}>
-          All Tasks and Notes
-        </button>
-      </p>
-      <p>
-        <button
-          className="create-project-button"
-          onClick={handleCreateProjectClick}
-        >
-          Create new Project
-        </button>
-      </p>
+      <div className="side-menu-buttons">
+        <p>
+          <button className="dashmenu-button" onClick={handleProjectClick}>
+            Project-List
+          </button>
+        </p>
+        <p>
+          <button className="dashmenu-button" onClick={handleTaskNoteClick}>
+            All Tasks and Notes
+          </button>
+        </p>
+        <p>
+          <button
+            className="dashmenu-button"
+            onClick={handleCreateProjectClick}
+          >
+            Create new Project
+          </button>
+        </p>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,6 @@ const Hero = () => {
     <div className="hero">
       <div>
         <Outlet />
-        <div></div>
       </div>
     </div>
   );

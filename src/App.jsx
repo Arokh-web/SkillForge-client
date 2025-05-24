@@ -1,6 +1,7 @@
 // Import of styles
 import "./styles/App.css";
 import "./styles/Home.css";
+import "./styles/dashboard.css";
 
 // Import of pages (displayed in hero.jsx)
 import Projects from "./pages/Projects.jsx";
@@ -11,11 +12,9 @@ import TaskDetail from "./components/heroComponents/TaskDetail.jsx";
 import NoteDetail from "./components/heroComponents/NoteDetail.jsx";
 import ProjectDetail from "./components/heroComponents/ProjectDetail.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import Hero from "./components/heroComponents/Hero.jsx";
+import SignInUp from "./components/heroComponents/SignInUp.jsx";
 
 // Import of components
-import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 
 // Import of modules
@@ -24,7 +23,6 @@ import { useState } from "react";
 
 // Import of Contexts
 import { ProjectContext, TaskContext } from "./contexts/contexts.js";
-import SignInUp from "./components/heroComponents/SignInUp.jsx";
 
 function App() {
   // Setting of main states
