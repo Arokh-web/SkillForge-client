@@ -1,8 +1,8 @@
 // this is the project-dropdown component it only displays the projects of the signed-in user
 import { useEffect, useState } from "react";
-import fetchData from "../API/fetchData";
+import fetchData from "../../API/fetchData";
 import { useContext } from "react";
-import { TaskContext, ProjectContext } from "../contexts/contexts";
+import { TaskContext, ProjectContext } from "../../contexts/contexts";
 
 const ProjectDropDown = () => {
   // setting necessary LOCAL states

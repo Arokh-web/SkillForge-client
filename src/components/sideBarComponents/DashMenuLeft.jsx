@@ -1,4 +1,4 @@
-const SideMenu = () => {
+const DashMenuLeft = () => {
   const handleProjectClick = () => {
     window.location.href = "/projects";
   };
@@ -36,4 +36,4 @@ const SideMenu = () => {
   );
 };
 
-export default SideMenu;
+export default DashMenuLeft;

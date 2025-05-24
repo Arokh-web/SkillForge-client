@@ -13,7 +13,9 @@ const Header = () => {
       {/* HEADER CONTENT: with title, dark-mode-switch, logout-button and account-button */}
       <div className="header-content">
         <div className="menubar">
-          <div className="title">SkillForge</div>
+          <div className="title">
+            <Link to="/">SkillForge</Link>
+          </div>
           <div className="header-buttons">
             <div className="justify-left">
               <Link to="/dashboard">Go to Dashboard (Overview)</Link>

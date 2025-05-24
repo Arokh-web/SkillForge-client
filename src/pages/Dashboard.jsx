@@ -4,7 +4,7 @@
 // calculated progress
 // action buttons for creating new projects, tasks and notes
 
-import DashboardButtonBar from "../components/DashboardButtonBar";
+import DashboardButtonBar from "../components/dashboardComponents/DashboardButtonBar";
 
 const Dashboard = () => {
   return (

@@ -1,7 +1,7 @@
 // this is the task-list on the left, dependend on the selected project from the project-dropdown; it exists in the left side bar
 
 import { useEffect, useContext, useState } from "react";
-import { TaskContext } from "../contexts/contexts";
+import { TaskContext } from "../../contexts/contexts";
 
 const TaskList = () => {
   const { tasks, setTasks } = useContext(TaskContext);

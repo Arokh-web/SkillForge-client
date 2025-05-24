@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
-.home {
-  @apply h-full ;
-}
-
 .sidebar-left {
   @apply flex flex-col w-1/5 bg-[var(--color-sidebarBg)] rounded-2xl p-5 gap-5 shadow-lg;
 }
 
+.hero-sidebar-placement {
+  @apply flex grow gap-5 w-full mt-5;
+}
+
 /* Dashboard-Components go here: project-dropdown and tasklist */
+/* behaviour of left-side of dashboard */
 .task-list-container {
   @apply min-h-1/3 w-full bg-[var(--color-tasklistBg)] rounded-2xl p-5;
 }
@@ -32,6 +33,8 @@
 .selected-task {
   @apply bg-[var(--color-selectedTaskBg)] rounded-2xl;
 }
+
+/* behaviour of left-side of dashboard END */
 
 .hero {
   @apply w-4/5 bg-[var(--color-heroBg)] rounded-2xl p-5 shadow-lg;
