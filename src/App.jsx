@@ -28,12 +28,14 @@ function App() {
   // Setting of main states
   const [tasks, setTasks] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [selectedProject, setSelectedProject] = useState("");
   // const [loading, setLoading] = useState(true);
-  // const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <div>
-      <ProjectContext.Provider value={{ projects, setProjects }}>
+      <ProjectContext.Provider
+        value={{ projects, setProjects, selectedProject, setSelectedProject }}
+      >
         <TaskContext.Provider value={{ tasks, setTasks }}>
           <Routes>
             <Route path="/" element={<Home />}>

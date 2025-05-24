@@ -7,9 +7,10 @@ import { TaskContext, ProjectContext } from "../../contexts/contexts";
 const ProjectDropDown = () => {
   // setting necessary LOCAL states
   const [loading, setLoading] = useState(true);
-  const [selectedProject, setSelectedProject] = useState("");
+
   // setting contexts
-  const { projects, setProjects } = useContext(ProjectContext);
+  const { projects, setProjects, selectedProject, setSelectedProject } =
+    useContext(ProjectContext);
   const { tasks, setTasks } = useContext(TaskContext);
 
   // fetching data from the API: PROJECTS
@@ -35,7 +36,7 @@ const ProjectDropDown = () => {
         setLoading(true);
         const rawTasks = await fetchData(
           "GET",
-          "/api/tasks/projects/" + selectedProject
+          "/api/tasks/projects/" + selectedProject.id
         );
         const tasks = rawTasks.map((task) => ({
           ...task,
@@ -44,7 +45,7 @@ const ProjectDropDown = () => {
 
         setTasks(tasks);
         setLoading(false);
-        console.log(tasks);
+        console.log("Count of corresponding tasks:", tasks.length);
       }
     };
 
@@ -52,7 +53,10 @@ const ProjectDropDown = () => {
   }, [selectedProject]);
 
   const handleChange = (event) => {
-    setSelectedProject(event.target.value);
+    const selectId = event.target.value;
+    const project = projects.find((project) => String(project.id) === selectId);
+    setSelectedProject(project || "");
+    console.log("Selected project:", project.title);
   };
 
   return (
@@ -62,7 +66,7 @@ const ProjectDropDown = () => {
       ) : (
         <div>
           <select
-            value={selectedProject}
+            value={selectedProject ? selectedProject.id : ""}
             onChange={handleChange}
             className="project-select"
           >
