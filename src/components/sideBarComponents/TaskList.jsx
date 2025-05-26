@@ -1,12 +1,10 @@
 // this is the task-list on the left, dependend on the selected project from the project-dropdown; it exists in the left side bar
 
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { TaskContext } from "../../contexts/contexts";
 
 const TaskList = () => {
   const { tasks, setTasks, setSelectedTask } = useContext(TaskContext);
-  const [returnMessage, setReturnMessage] = useState("");
-  const [selectedCount, setSelectedCount] = useState();
 
   const handleSelect = (id) => {
     // instead of setting tasks, there is a function that sets the tasks depending on the previous state
@@ -33,18 +31,6 @@ const TaskList = () => {
     });
   };
 
-  useEffect(() => {
-    // This is where you can set the return message based on the selected tasks
-    const selected = tasks.filter((task) => task.selected);
-    setSelectedCount(selected.length);
-    setSelectedTask(selected);
-    selectedCount === 3
-      ? setReturnMessage(
-          `You have selected ${selectedCount} task(s): No more than three tasks can be selected!`
-        )
-      : setReturnMessage("");
-  }, [tasks]);
-
   return (
     <div className="task-list-container">
       {tasks.map((task) => (
@@ -58,24 +44,6 @@ const TaskList = () => {
           </p>
         </div>
       ))}
-      <div>
-        {returnMessage && (
-          <div className="return-message">
-            <p>{returnMessage}</p>
-          </div>
-        )}
-      </div>
-
-      {/* <select
-        onChange={handleChange}
-        value={selectedTask}
-        className="task-select"
-      >
-        Select a task
-        {tasks.map((task) => (
-          <option key={task.id}>{task.title}</option>
-        ))}
-      </select> */}
     </div>
   );
 };

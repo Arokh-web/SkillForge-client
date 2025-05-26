@@ -1,38 +1,29 @@
 import { TaskContext, ProjectContext } from "../../contexts/contexts";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import fetchData from "../../API/fetchData";
-import { use } from "react";
-import React from "react";
 
 const DashTaskPrev = () => {
-  const { selectedTask } = useContext(TaskContext);
+  const { selectedTask, setSelectedTask } = useContext(TaskContext);
   const { selectedProject } = useContext(ProjectContext);
 
   console.log("Selected Tasks:", selectedTask);
 
   const handleCheckboxChange = (task, value) => {
     const changeTaskStatus = async (task) => {
-      let newStatus;
-      switch (value) {
-        case "done":
-          newStatus = "done";
-          break;
-        case "active":
-          newStatus = "active";
-          break;
-        case "planned":
-          newStatus = "planned";
-          break;
-        default:
-          newStatus = task.status;
-          break;
-      }
-      await fetchData("PATCH", "/api/tasks/" + task.id, { status: newStatus });
+      console.log(
+        "Sending PATCH request for task:",
+        task.id,
+        "with value:",
+        value
+      );
+      await fetchData("PATCH", "/api/tasks/" + task.id, { status: value });
+      setSelectedTask((prevTasks) =>
+        prevTasks.map((t) => (t.id === task.id ? { ...t, status: value } : t))
+      );
     };
     changeTaskStatus(task);
   };
 
-  // console.log(`Status for task "${task.title}" changed to ${task.status}`);
   return (
     <>
       <div className="dash-task-prev">
@@ -52,13 +43,9 @@ const DashTaskPrev = () => {
               </tr>
             </thead>
             <tbody>
-              {/* 
-              // priority: Joi.string().max(25).default("normal"),
-              // pinned: Joi.boolean().default(false), */}
-
-              {selectedTask.flatMap((task) => [
-                <>
-                  <tr key={task.id} className="task-item">
+              {selectedTask.map((task) => [
+                <React.Fragment key={task.id}>
+                  <tr key={`${task.id}-row}`} className="task-item">
                     <td>
                       <p className="text-sm font-medium">{task.title}</p>
                     </td>
@@ -69,8 +56,8 @@ const DashTaskPrev = () => {
                       <p className="text-xs">{task.deadline}</p>
                     </td>
                   </tr>
-                  ,
-                  <tr key={task.id} className="task-radiobuttons">
+
+                  <tr key={`${task.id}-radio}`} className="task-radiobuttons">
                     <td>
                       Done?
                       <input
@@ -114,7 +101,7 @@ const DashTaskPrev = () => {
                   {/* <button name="open-notes btn-primary">
                       Open connetected notes
                     </button> */}
-                </>,
+                </React.Fragment>,
               ])}
             </tbody>
           </table>
