@@ -29,6 +29,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState("");
+  const [selectedTask, setSelectedTask] = useState("");
   // const [loading, setLoading] = useState(true);
 
   return (
@@ -36,7 +37,9 @@ function App() {
       <ProjectContext.Provider
         value={{ projects, setProjects, selectedProject, setSelectedProject }}
       >
-        <TaskContext.Provider value={{ tasks, setTasks }}>
+        <TaskContext.Provider
+          value={{ tasks, setTasks, selectedTask, setSelectedTask }}
+        >
           <Routes>
             <Route path="/" element={<Home />}>
               {/* <Route index element={<Hero />} /> */}

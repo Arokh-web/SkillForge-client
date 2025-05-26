@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const NoteDetail = () => {
   return (
-    <div>NoteDetail</div>
-  )
-}
+    <div>
+      <p className="sub-title">NoteDetail</p>
+    </div>
+  );
+};
 
-export default NoteDetail
+export default NoteDetail;

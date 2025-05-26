@@ -4,13 +4,9 @@ import { useEffect, useContext, useState } from "react";
 import { TaskContext } from "../../contexts/contexts";
 
 const TaskList = () => {
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { tasks, setTasks, setSelectedTask } = useContext(TaskContext);
   const [returnMessage, setReturnMessage] = useState("");
   const [selectedCount, setSelectedCount] = useState();
-
-  // const handleChange = (event) => {
-  //   setSelectedTask(event.target.value);
-  // };
 
   const handleSelect = (id) => {
     // instead of setting tasks, there is a function that sets the tasks depending on the previous state
@@ -39,7 +35,9 @@ const TaskList = () => {
 
   useEffect(() => {
     // This is where you can set the return message based on the selected tasks
-    setSelectedCount(tasks.filter((task) => task.selected).length);
+    const selected = tasks.filter((task) => task.selected);
+    setSelectedCount(selected.length);
+    setSelectedTask(selected);
     selectedCount === 3
       ? setReturnMessage(
           `You have selected ${selectedCount} task(s): No more than three tasks can be selected!`

@@ -11,8 +11,9 @@ const SideBarLeft = () => {
 
   // object with all the routes and their corresponding components to load dynamically
   const sidebarRoutes = {
-    "/dashboard": [<ProjectDropDown />, <TaskList />, <DashMenuLeft />],
+    "/dashboard": [<DashMenuLeft />, <ProjectDropDown />, <TaskList />],
     "/profile": [<DashMenuLeft />],
+    "/projects": [<DashMenuLeft />],
   };
 
   // find the route that matches the current location (location -> looks for the "param" in the URL as pathname)

@@ -11,7 +11,8 @@ const ProjectDropDown = () => {
   // setting contexts
   const { projects, setProjects, selectedProject, setSelectedProject } =
     useContext(ProjectContext);
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { tasks, setTasks, setSelectedTask, selectedTask } =
+    useContext(TaskContext);
 
   // fetching data from the API: PROJECTS
   // Explanation: useEffect is triggered on site-load. it shows loading = true as long as the await-function is not finished
@@ -56,6 +57,7 @@ const ProjectDropDown = () => {
     const selectId = event.target.value;
     const project = projects.find((project) => String(project.id) === selectId);
     setSelectedProject(project || "");
+    setSelectedTask("");
     console.log("Selected project:", project.title);
   };
 

@@ -4,16 +4,24 @@
 /* Definition of main website-colors */
 @theme {
   --color-bar-bg: #e0c097;
-  --color-textMain: #26353b;
+  --color-textMain: #2c2c2c;
+  --color-textSecondary: #555555;
+  --color-textTitles: #1f1f1f;
   --color-logout: rgba(255, 0, 0, 0.5);
   --color-account: #bbff00;
   --color-sidebarBg: #2c3e50;
 
   --color-tasklistBg: #6f97a2;
   --color-selectedTaskBg: #b9d9e2;
+  --color-taskPreviewBg: #d3eaf0;
+  --color-taskPreviewBorder: #5a7d89;
+  --color-taskPreviewText: #ffffff;
 
   --color-selectedProjectBg: #f1c181;
   --color-projectDropdownBg: #b75c5c;
+  --color-projectPreviewBg: #eac6aa;
+  --colorprojectPreviewBorder: #a85050;
+  --color-projectPreviewText: #ffffff;
 
   --color-heroBg: #f9e5c5;
   --color-mainBg: linearGradient(#f4f1ec, #f9e5c5);
@@ -58,7 +66,17 @@ body {
 }
 
 .title {
-  @apply flex text-4xl;
+  @apply flex text-5xl text-[var(--color-textTitles)];
+  font-family: var(--font-family-logo);
+}
+
+.sub-title {
+  @apply text-4xl text-[var(--color-textTitles)];
+  font-family: var(--font-family-logo);
+}
+
+.project-title {
+  @apply text-2xl text-[var(--color-textTitles)];
 }
 
 .header-buttons {

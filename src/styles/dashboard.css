@@ -41,3 +41,29 @@
 .dashmenu-button:hover {
   @apply bg-[var(--color-selectedTaskBg)];
 }
+
+/* hero content */
+
+.dash-project-prev {
+  @apply w-2/5 bg-[var(--color-projectPreviewBg)] rounded-2xl p-5;
+}
+
+.dash-task-prev {
+  @apply flex flex-col w-2/5 bg-[var(--color-taskPreviewBg)] rounded-2xl p-5;
+}
+
+.dash-task-item-list {
+  @apply flex flex-col;
+}
+
+.task-item {
+  @apply flex gap-2 justify-between;
+}
+
+.task-radiobuttons {
+  @apply flex gap-2 justify-around;
+}
+
+.checkbox:hover {
+  @apply bg-[var(--color-checkboxHoverBg)];
+}

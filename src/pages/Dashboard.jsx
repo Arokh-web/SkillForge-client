@@ -12,7 +12,7 @@ import DashTaskPrev from "../components/dashboardComponents/DashTaskPrev";
 const Dashboard = () => {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1 className="title">Dashboard</h1>
       <p>
         Welcome to your dashboard! Here you can see an overview of your
         projects, tasks, and notes.
