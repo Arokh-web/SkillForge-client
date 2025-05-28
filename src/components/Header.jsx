@@ -18,7 +18,9 @@ const Header = () => {
           </div>
           <div className="header-buttons">
             <div className="justify-left">
-              <Link to="/dashboard">Go to Dashboard (Overview)</Link>
+              <Link to="dashboard">Go to Dashboard (Overview)</Link>
+              <Link to="projects">Projects</Link>
+              <Link to="tasks">Tasks</Link>
             </div>
             <div className="dark-mode-button"></div>
             <div className="logout-button">

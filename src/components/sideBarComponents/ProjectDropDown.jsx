@@ -1,57 +1,18 @@
 // this is the project-dropdown component it only displays the projects of the signed-in user
-import { useEffect, useState } from "react";
-import fetchData from "../../API/fetchData";
-import { useContext } from "react";
-import { TaskContext, ProjectContext } from "../../contexts/contexts";
+import {
+  useTaskContextSingle,
+  useProjectContext,
+} from "../../contexts/contexts";
 
 const ProjectDropDown = () => {
-  // setting necessary LOCAL states
-  const [loading, setLoading] = useState(true);
-
   // setting contexts
-  const { projects, setProjects, selectedProject, setSelectedProject } =
-    useContext(ProjectContext);
-  const { tasks, setTasks, setSelectedTask, selectedTask } =
-    useContext(TaskContext);
+  const { projects, selectedProject, setSelectedProject, loading } =
+    useProjectContext();
+  const { setSelectedTask } = useTaskContextSingle();
 
   // fetching data from the API: PROJECTS
   // Explanation: useEffect is triggered on site-load. it shows loading = true as long as the await-function is not finished
   // and then sets the data to the projects-state. The loading state is set to false when the data is fetched.
-  useEffect(() => {
-    const getProjects = async () => {
-      setLoading(true);
-      const rawProjects = await fetchData("GET", "/api/projects");
-      const projects = rawProjects.map((project) => ({
-        ...project,
-        selected: false, // Initialize selected state for each project; not in the API!
-      }));
-      setProjects(projects);
-      setLoading(false);
-    };
-    getProjects();
-  }, []);
-
-  useEffect(() => {
-    const getTasks = async () => {
-      if (selectedProject) {
-        setLoading(true);
-        const rawTasks = await fetchData(
-          "GET",
-          "/api/tasks/projects/" + selectedProject.id
-        );
-        const tasks = rawTasks.map((task) => ({
-          ...task,
-          selected: false, // Initialize selected state for each task; not in the API!
-        }));
-
-        setTasks(tasks);
-        setLoading(false);
-        console.log("Count of corresponding tasks:", tasks.length);
-      }
-    };
-
-    getTasks();
-  }, [selectedProject]);
 
   const handleChange = (event) => {
     const selectId = event.target.value;

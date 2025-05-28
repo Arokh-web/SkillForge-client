@@ -1,30 +1,15 @@
 // This is the main page for the Projects section of the application
-import { useEffect, useState } from "react";
-import fetchData from "../API/fetchData";
-import { createContext } from "react";
-
-const ProjectDataContext = createContext();
+import { useProjectContext } from "../contexts/contexts.jsx";
 
 const Projects = () => {
   // setting necessary States
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { projects, loading } = useContext(useProjectContext);
 
   // fetching data from the API: PROJECTS
   // Explanation: useEffect is triggered on site-load. it shows loading = true as long as the await-function is not finished
   // and then sets the data to the projects-state. The loading state is set to false when the data is fetched.
-  useEffect(() => {
-    const getProjects = async () => {
-      setLoading(true);
-      const data = await fetchData("GET", "/api/projects");
-      console.log(data);
-      setProjects(data);
-      setLoading(false);
-    };
-    // the function getProjects is called when the component is called first time
-    getProjects();
-  }, []);
 
+  
   return (
     <div>
       <h2>Featured Projects</h2>

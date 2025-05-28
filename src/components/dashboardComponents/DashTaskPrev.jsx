@@ -1,9 +1,9 @@
-import { TaskContext } from "../../contexts/contexts";
-import React, { useContext } from "react";
+import { useTaskContextSingle } from "../../contexts/contexts";
 import fetchData from "../../API/fetchData";
+import React from "react";
 
 const DashTaskPrev = () => {
-  const { selectedTask, setSelectedTask } = useContext(TaskContext);
+  const { selectedTask, setSelectedTask } = useTaskContextSingle();
 
   console.log("Selected Tasks:", selectedTask);
 

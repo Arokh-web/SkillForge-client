@@ -19,27 +19,15 @@ import Home from "./pages/Home.jsx";
 
 // Import of modules
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
 
 // Import of Contexts
-import { ProjectContext, TaskContext } from "./contexts/contexts.js";
+import { ProjectProvider, TaskProviderSingle } from "./contexts/contexts";
 
 function App() {
-  // Setting of main states
-  const [tasks, setTasks] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState("");
-  const [selectedTask, setSelectedTask] = useState("");
-  // const [loading, setLoading] = useState(true);
-
   return (
     <div>
-      <ProjectContext.Provider
-        value={{ projects, setProjects, selectedProject, setSelectedProject }}
-      >
-        <TaskContext.Provider
-          value={{ tasks, setTasks, selectedTask, setSelectedTask }}
-        >
+      <ProjectProvider>
+        <TaskProviderSingle>
           <Routes>
             <Route path="/" element={<Home />}>
               {/* <Route index element={<Hero />} /> */}
@@ -63,8 +51,8 @@ function App() {
               {/* The note-id-component  shows the edittable details of one note. connecting tasks is possible here. */}
             </Route>
           </Routes>
-        </TaskContext.Provider>
-      </ProjectContext.Provider>
+        </TaskProviderSingle>
+      </ProjectProvider>
     </div>
   );
 }

@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import { ProjectContext } from "../../contexts/contexts";
+import { useProjectContext } from "../../contexts/contexts";
 
 const DashProjectPrev = () => {
-  const { selectedProject } = useContext(ProjectContext);
+  const { selectedProject } = useProjectContext()
 
   return (
     <div className="dash-project-prev">
       <p className="sub-title">Project Overview</p>
-      <p className="project-title">{selectedProject.title}</p>
+      <p className="project-title">{selectedProject?.title}</p>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 // this is the task-list on the left, dependend on the selected project from the project-dropdown; it exists in the left side bar
 
-import { useEffect, useContext, useState } from "react";
-import { TaskContext } from "../../contexts/contexts";
+import { useEffect, useState } from "react";
+import { useTaskContextSingle } from "../../contexts/contexts";
 
 const TaskList = () => {
-  const { tasks, setTasks, setSelectedTask } = useContext(TaskContext);
+  const { tasks, setTasks, setSelectedTask } = useTaskContextSingle();
   const [returnMessage, setReturnMessage] = useState("");
   const [selectedCount, setSelectedCount] = useState();
 
@@ -44,6 +44,8 @@ const TaskList = () => {
         )
       : setReturnMessage("");
   }, [tasks]);
+
+  if (!tasks) return <div>Loading tasks...</div>;
 
   return (
     <div className="task-list-container">
