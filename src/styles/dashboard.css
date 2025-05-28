@@ -44,7 +44,7 @@
 
 /* hero content */
 
-.dash-project-prev {
+/* .dash-project-prev {
   @apply w-2/5 bg-[var(--color-projectPreviewBg)] rounded-2xl p-5;
 }
 
@@ -66,4 +66,4 @@
 
 .checkbox:hover {
   @apply bg-[var(--color-checkboxHoverBg)];
-}
+} */
