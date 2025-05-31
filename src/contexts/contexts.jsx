@@ -1,17 +1,21 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import fetchData from "../API/fetchData";
 
+// CONTEXT DEFINITION
 const TaskContextAll = createContext(null);
 const TaskContextSingle = createContext(null);
 const ProjectContext = createContext(null);
 const NoteContextAll = createContext(null);
 
+// CREATE CUSTOM HOOKS - useNAME gets the value of the specified context to be of that context, but selfmade (own name)
 export const useProjectContext = () => useContext(ProjectContext);
 export const useTaskContextAll = () => useContext(TaskContextAll);
 export const useTaskContextSingle = () => useContext(TaskContextSingle);
 export const useNoteContextAll = () => useContext(NoteContextAll);
 
-// GET DATA CONTEXTS
+// GET PROJECT DATA
+// These function create the providers, formerly used as ProjectContext.Provider in App.jsx;
+// It's possible to even concentrate ALL providers in one single "PROVIDER", but at first it will be separated for clarity.
 export const ProjectProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
