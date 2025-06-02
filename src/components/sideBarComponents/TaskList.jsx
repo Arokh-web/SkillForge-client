@@ -44,7 +44,7 @@ const TaskList = () => {
           `You have selected ${selectedCount} task(s): No more than three tasks can be selected!`
         )
       : setReturnMessage("");
-  }, [tasks, selectedTask]);
+  }, [tasks]);
 
   if (!tasks) return <div>Loading tasks...</div>;
 
@@ -68,8 +68,6 @@ const TaskList = () => {
           </div>
         )}
       </div>
-
-
     </div>
   );
 };

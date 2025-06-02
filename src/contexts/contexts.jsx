@@ -113,7 +113,7 @@ export const TaskProviderSingle = ({ children }) => {
     };
 
     getTasks(selectedProject.id);
-  }, []);
+  }, [selectedProject]);
 
   return (
     <TaskContextSingle.Provider
