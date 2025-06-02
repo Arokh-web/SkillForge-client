@@ -30,6 +30,7 @@ export const ProjectProvider = ({ children }) => {
         selected: false,
       }));
       setProjects(projects);
+
       setLoading(false);
     };
     getProjects();
@@ -52,39 +53,44 @@ export const ProjectProvider = ({ children }) => {
 };
 
 // GET TASKS; ALL
-export const TaskProviderAll = ({ children }) => {
-  const [allTasks, setAllTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+// export const TaskProviderAll = ({ children }) => {
+//   const [allTasks, setAllTasks] = useState([]);
+//   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const getTasks = async () => {
-      setLoading(true);
-      const data = await fetchData("GET", "/api/tasks");
-      console.log(data);
-      setAllTasks(data);
-      setLoading(false);
-    };
-    getTasks();
-  }, []);
+//   useEffect(() => {
+//     const getTasks = async () => {
+//       setLoading(true);
+//       const data = await fetchData("GET", "/api/tasks");
+//       console.log(data);
+//       setAllTasks(data);
+//       setLoading(false);
+//     };
+//     getTasks();
+//   }, []);
 
-  return (
-    <TaskContextAll.Provider
-      value={{ allTasks, setAllTasks, loading, setLoading }}
-    >
-      {children}
-    </TaskContextAll.Provider>
-  );
-};
+//   return (
+//     <TaskContextAll.Provider
+//       value={{ allTasks, setAllTasks, loading, setLoading }}
+//     >
+//       {children}
+//     </TaskContextAll.Provider>
+//   );
+// };
 
 // GET TASKS; per project
 export const TaskProviderSingle = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState([]);
+  const [taskCount, setTaskCount] = useState({});
   const [loading, setLoading] = useState(true);
   const { selectedProject } = useProjectContext();
 
   useEffect(() => {
     const getTasks = async () => {
+      if (!selectedProject?.id) {
+        console.log("No project selected, skipping task fetch.");
+        return;
+      }
       setLoading(true);
       const rawTasks = await fetchData(
         "GET",
@@ -96,13 +102,18 @@ export const TaskProviderSingle = ({ children }) => {
       }));
 
       setTasks(tasks);
+
+      setTaskCount((prev) => ({
+        ...prev,
+        [selectedProject.id]: tasks.length,
+      }));
+
       setLoading(false);
       console.log("Count of corresponding tasks:", tasks.length);
     };
-    if (selectedProject?.id) {
-      getTasks(selectedProject.id);
-    }
-  }, [selectedProject]);
+
+    getTasks(selectedProject.id);
+  }, []);
 
   return (
     <TaskContextSingle.Provider
@@ -111,6 +122,8 @@ export const TaskProviderSingle = ({ children }) => {
         setTasks,
         setSelectedTask,
         selectedTask,
+        taskCount,
+        setTaskCount,
         loading,
         setLoading,
       }}

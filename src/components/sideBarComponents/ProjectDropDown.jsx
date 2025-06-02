@@ -15,11 +15,17 @@ const ProjectDropDown = () => {
   // and then sets the data to the projects-state. The loading state is set to false when the data is fetched.
 
   const handleChange = (event) => {
-    const selectId = event.target.value;
-    const project = projects.find((project) => String(project.id) === selectId);
-    setSelectedProject(project || "");
+    const selectId = parseInt(event.target.value, 10);
+    const updatedProjects = projects.map((project) => ({
+      ...project,
+      selected: project.id === selectId,
+    }));
+
+    const selected = updatedProjects.find((project) => project.id === selectId);
+
+    setSelectedProject(selected);
     setSelectedTask("");
-    console.log("Selected project:", project.title);
+    console.log("Selected project:", selected?.title);
   };
 
   return (
@@ -29,7 +35,7 @@ const ProjectDropDown = () => {
       ) : (
         <div>
           <select
-            value={selectedProject ? selectedProject.id : ""}
+            value={selectedProject?.id ?? ""}
             onChange={handleChange}
             className="project-select"
           >

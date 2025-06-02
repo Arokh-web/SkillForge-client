@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useTaskContextSingle } from "../../contexts/contexts";
 
 const TaskList = () => {
-  const { tasks, setTasks, setSelectedTask } = useTaskContextSingle();
+  const { tasks, setTasks, setSelectedTask, selectedTask } =
+    useTaskContextSingle();
   const [returnMessage, setReturnMessage] = useState("");
   const [selectedCount, setSelectedCount] = useState();
 
@@ -43,7 +44,7 @@ const TaskList = () => {
           `You have selected ${selectedCount} task(s): No more than three tasks can be selected!`
         )
       : setReturnMessage("");
-  }, [tasks]);
+  }, [tasks, selectedTask]);
 
   if (!tasks) return <div>Loading tasks...</div>;
 
@@ -68,16 +69,7 @@ const TaskList = () => {
         )}
       </div>
 
-      {/* <select
-        onChange={handleChange}
-        value={selectedTask}
-        className="task-select"
-      >
-        Select a task
-        {tasks.map((task) => (
-          <option key={task.id}>{task.title}</option>
-        ))}
-      </select> */}
+
     </div>
   );
 };
