@@ -156,3 +156,16 @@ export const NoteProviderAll = ({ children }) => {
     </NoteContextAll.Provider>
   );
 };
+
+export const changePinnedStatus = (task, value) => {
+  const changeTaskPinned = async (task) => {
+    console.log(
+      "Sending PATCH request for task:",
+      task.id,
+      "with value:",
+      value
+    );
+    await fetchData("PATCH", "/api/tasks/" + task.id, { pinned: value });
+  };
+  changeTaskPinned(task);
+};

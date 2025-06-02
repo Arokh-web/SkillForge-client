@@ -2,6 +2,7 @@
 import "./styles/App.css";
 import "./styles/Home.css";
 import "./styles/dashboard.css";
+import "./styles/projectAndTaskList.css";
 
 // Import of pages (displayed in hero.jsx)
 import Projects from "./pages/Projects.jsx";
@@ -44,7 +45,7 @@ function App() {
               {/* SHOWS: The TASKS and NOTES page shows ALL the tasks and notes of the user. 
           POSSIBILITY: The user can add tasks and notes here. 
           WHERE: It is displayed within the hero-component with the sidebar */}
-              <Route path="tasks-and-notes" element={<Tasks />} />
+              <Route path="tasks" element={<Tasks />} />
               <Route path="tasks/:taskId" element={<TaskDetail />} />
               <Route path="notes/:noteId" element={<NoteDetail />} />
               {/* The task-id-component shows the edittable details of one task. adding tasks is possible here. */}

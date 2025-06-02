@@ -1,7 +1,7 @@
 // this is the main area for the left side bar; in it is the project-dropdown and the task list (at least in dashboard-mode)
 
-import ProjectDropDown from "./ProjectDropDown";
-import TaskList from "./TaskList";
+import ProjectDropDown from "./SideProjectDropDown";
+import TaskList from "./SideTaskList";
 import DashMenuLeft from "./DashMenuLeft";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -14,6 +14,7 @@ const SideBarLeft = () => {
     "/dashboard": [<DashMenuLeft />, <ProjectDropDown />, <TaskList />],
     "/profile": [<DashMenuLeft />],
     "/projects": [<DashMenuLeft />],
+    "/tasks": [<ProjectDropDown />],
   };
 
   // find the route that matches the current location (location -> looks for the "param" in the URL as pathname)
