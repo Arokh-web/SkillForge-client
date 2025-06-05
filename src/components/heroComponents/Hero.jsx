@@ -2,6 +2,7 @@
 // selection-logic for all sub-pages will be implemented here depending on login/situation
 
 import { Outlet } from "react-router-dom";
+import SignInUp from "../SignComponents/SignInUp.jsx";
 
 const Hero = () => {
   return (

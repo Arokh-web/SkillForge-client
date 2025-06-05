@@ -6,12 +6,14 @@ const TaskContextAll = createContext(null);
 const TaskContextSingle = createContext(null);
 const ProjectContext = createContext(null);
 const NoteContextAll = createContext(null);
+const AuthContext = createContext(null);
 
 // CREATE CUSTOM HOOKS - useNAME gets the value of the specified context to be of that context, but selfmade (own name)
 export const useProjectContext = () => useContext(ProjectContext);
 export const useTaskContextAll = () => useContext(TaskContextAll);
 export const useTaskContextSingle = () => useContext(TaskContextSingle);
 export const useNoteContextAll = () => useContext(NoteContextAll);
+export const useAuthContext = () => useContext(AuthContext);
 
 // GET PROJECT DATA
 // These function create the providers, formerly used as ProjectContext.Provider in App.jsx;
@@ -168,4 +170,33 @@ export const changePinnedStatus = (task, value) => {
     await fetchData("PATCH", "/api/tasks/" + task.id, { pinned: value });
   };
   changeTaskPinned(task);
+};
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchData("GET", `/auth/me/`);
+        console.log("Fetched user data!");
+        setUser(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
