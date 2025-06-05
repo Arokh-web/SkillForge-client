@@ -2,7 +2,7 @@
 
 import ProjectDropDown from "./SideProjectDropDown";
 import TaskList from "./SideTaskList";
-import DashMenuLeft from "./DashMenuLeft";
+import MenuLeft from "./MenuLeft";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -11,10 +11,10 @@ const SideBarLeft = () => {
 
   // object with all the routes and their corresponding components to load dynamically
   const sidebarRoutes = {
-    "/dashboard": [<DashMenuLeft />, <ProjectDropDown />, <TaskList />],
-    "/profile": [<DashMenuLeft />],
-    "/projects": [<DashMenuLeft />],
-    "/tasks": [<ProjectDropDown />],
+    "/dashboard": [<MenuLeft />, <ProjectDropDown />, <TaskList />],
+    "/profile": [<MenuLeft />],
+    "/projects": [<MenuLeft />],
+    "/tasks": [<MenuLeft />, <ProjectDropDown />],
   };
 
   // find the route that matches the current location (location -> looks for the "param" in the URL as pathname)

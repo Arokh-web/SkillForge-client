@@ -1,8 +1,8 @@
 // This is the main page for the Tasks section of the application
 import React from "react";
-import { useTaskContextSingle } from "../contexts/contexts.jsx";
+import { useTaskContextSingle } from "../../contexts/contexts.jsx";
 import { useState } from "react";
-import { changePinnedStatus } from "../contexts/contexts.jsx";
+import { changePinnedStatus } from "../../contexts/contexts.jsx";
 
 const Tasks = () => {
   const { setTasks, tasks, loading } = useTaskContextSingle();

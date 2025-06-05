@@ -1,7 +1,7 @@
 // This is the main page for the Projects section of the application
-import { useProjectContext } from "../contexts/contexts.jsx";
-import React, { useState } from "react";
-import { useTaskContextSingle } from "../contexts/contexts.jsx";
+import { useProjectContext } from "../../contexts/contexts.jsx";
+import { useState } from "react";
+import { useTaskContextSingle } from "../../contexts/contexts.jsx";
 
 const Projects = () => {
   // setting necessary States

@@ -26,23 +26,19 @@
   @apply bg-[var(--color-selectedTaskBg)] rounded-2xl;
 }
 
-.side-menu {
-  @apply flex flex-col;
+.side-menu-buttons-container {
+  @apply flex flex-wrap gap-2 justify-center items-center;
 }
 
-.side-menu-buttons {
-  @apply flex gap-2;
+.menu-button {
+  @apply bg-[var(--color-tasklistBg)] rounded-2xl p-2 items-center justify-center border-t-2;
 }
 
-.dashmenu-button {
-  @apply bg-[var(--color-tasklistBg)] rounded-2xl p-2 items-center justify-center;
-}
-
-.dashmenu-button:hover {
+.menu-button:hover {
   @apply bg-[var(--color-selectedTaskBg)];
 }
 
-/* hero content */
+/* dashboard content */
 
 /* .dash-project-prev {
   @apply w-2/5 bg-[var(--color-projectPreviewBg)] rounded-2xl p-5;

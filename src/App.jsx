@@ -5,15 +5,15 @@ import "./styles/dashboard.css";
 import "./styles/projectAndTaskList.css";
 
 // Import of pages (displayed in hero.jsx)
-import Projects from "./pages/Projects.jsx";
-import Tasks from "./pages/Tasks.jsx";
-import Notes from "./pages/Notes.jsx";
-import CreateProject from "./pages/CreateProject.jsx";
-import TaskDetail from "./components/heroComponents/TaskDetail.jsx";
-import NoteDetail from "./components/heroComponents/NoteDetail.jsx";
-import ProjectDetail from "./components/heroComponents/ProjectDetail.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import Projects from "./components/TaskAndProjectList/Projects.jsx";
+import Tasks from "./components/TaskAndProjectList/Tasks.jsx";
+import Notes from "./components/TaskAndProjectList/Notes.jsx";
+import CreateProject from "./components/TaskAndProjectList/CreateProject.jsx";
+import Dashboard from "./components/dashboardComponents/Dashboard.jsx";
 import SignInUp from "./components/heroComponents/SignInUp.jsx";
+import ProjectDetail from "./components/TaskAndProjectList/ProjectDetail.jsx";
+import TaskDetail from "./components/TaskAndProjectList/TaskDetail.jsx";
+import NoteDetail from "./components/TaskAndProjectList/NoteDetail.jsx";
 
 // Import of components
 import Home from "./pages/Home.jsx";
@@ -23,6 +23,7 @@ import { Route, Routes } from "react-router-dom";
 
 // Import of Contexts
 import { ProjectProvider, TaskProviderSingle } from "./contexts/contexts";
+import CreateTaskorNote from "./components/TaskAndProjectList/CreateTaskorNote.jsx";
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
           WHERE: It is displayed within the hero-component with the sidebar */}
               <Route path="tasks" element={<Tasks />} />
               <Route path="tasks/:taskId" element={<TaskDetail />} />
+              <Route path="tasks/new" element={<CreateTaskorNote />} />
+              <Route path="notes" element={<Notes />} />
               <Route path="notes/:noteId" element={<NoteDetail />} />
               {/* The task-id-component shows the edittable details of one task. adding tasks is possible here. */}
               {/* The note-id-component  shows the edittable details of one note. connecting tasks is possible here. */}
