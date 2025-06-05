@@ -28,13 +28,13 @@
   --font-family-logo: "Island Moments", cursive;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 100vh;
+}
+
 :root {
   @apply h-full w-full bg-gradient-to-bl from-[#f1d3b1] via-[#ece5db] to-[#f1c181];
 }
-
-/* Main page behaviour */
-body {
-  @apply p-5 mx-auto;
-}
-
-

@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <div className="hero">
+    <div className="hero hero-fade-mask">
       <div>
         <Outlet />
       </div>
