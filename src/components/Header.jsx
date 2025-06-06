@@ -1,8 +1,10 @@
 // This is the upper menu bar, where the logo, the title of the current page, dark-mode-switch, logout-button and account-button exist
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../contexts/contexts";
 
 const Header = () => {
   // const [darkMode, setDarkMode] = useState(false);
+  const { user } = useAuthContext();
 
   return (
     // HEADER: with logo-container and header-content
@@ -21,6 +23,9 @@ const Header = () => {
               <Link to="dashboard">Go to Dashboard (Overview)</Link>
               <Link to="projects">Projects</Link>
               <Link to="tasks">Tasks</Link>
+              {user?.role === "admin" ? (
+                <Link to="adminpage">AdminPage</Link>
+              ) : null}
             </div>
             <div className="dark-mode-button"></div>
             <div className="logout-button">

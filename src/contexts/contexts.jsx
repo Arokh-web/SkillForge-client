@@ -207,7 +207,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
 
       try {
-        const data = await fetchData("GET", `/auth/me/`);
+        const data = await fetchData("GET", `/auth/me/`, );
         console.log("Fetched user data!");
         setUser(data);
         console.log("User data:", data);
@@ -230,7 +230,7 @@ export const AuthProvider = ({ children }) => {
     //   ? checkAuth()
     //   : console.log("No user ID found, skipping auth check.");
     checkAuth();
-  }, [user]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>

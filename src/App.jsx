@@ -27,7 +27,7 @@ import {
   UserProtectedRoute,
   AdminProtectedRoute,
 } from "./components/SignComponents/ProtectedRoute.jsx";
-import AdminPage from "./pages/AdminPage.jsx";
+import AdminPage from "./pages/AdminNavigation/AdminPage.jsx";
 
 // Import of Contexts
 import {

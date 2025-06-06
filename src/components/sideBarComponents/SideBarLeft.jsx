@@ -6,12 +6,11 @@ import MenuLeft from "./MenuLeft";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../../contexts/contexts";
-import { useNavigate } from "react-router-dom";
+import AdminNavigation from "./AdminNavigation";
 
 const SideBarLeft = () => {
   const { user } = useAuthContext();
   const location = useLocation();
-  const navigate = useNavigate();
 
   if (!user) {
     return (
@@ -33,6 +32,7 @@ const SideBarLeft = () => {
     "/profile": [<MenuLeft />],
     "/projects": [<MenuLeft />],
     "/tasks": [<MenuLeft />, <ProjectDropDown />],
+    "/adminpage": [<AdminNavigation />],
   };
 
   // find the route that matches the current location (location -> looks for the "param" in the URL as pathname)

@@ -1,5 +1,5 @@
 import { useAuthContext } from "../../contexts/contexts";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 export const UserProtectedRoute = ({ children }) => {
   const { user } = useAuthContext();
@@ -11,7 +11,7 @@ export const UserProtectedRoute = ({ children }) => {
     return <Navigate to="/signinup" replace />;
   }
 
-  return children;
+  return children ? children : <Outlet />;
 };
 
 export const AdminProtectedRoute = ({ children }) => {
@@ -19,7 +19,7 @@ export const AdminProtectedRoute = ({ children }) => {
 
   if (loading) return <div>Loading...</div>;
   if (user === null) return <Navigate to="/signinup" replace />;
-  if (user.role === "admin") return <Navigate to="/adminpage" />;
+  if (user.role !== "admin") return <Navigate to="/dashboard" />;
 
-  return children;
+  return children ? children : <Outlet />;
 };
