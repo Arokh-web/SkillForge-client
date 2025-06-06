@@ -5,9 +5,27 @@ import TaskList from "./SideTaskList";
 import MenuLeft from "./MenuLeft";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useAuthContext } from "../../contexts/contexts";
+import { useNavigate } from "react-router-dom";
 
 const SideBarLeft = () => {
+  const { user } = useAuthContext();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  if (!user) {
+    return (
+      <div className="sidebar-left">
+        <p className="text-4xl font-(family-name:--font-family-logo) text-white">
+          Welcome to SkillForge!
+        </p>
+        <p className="text-white">
+          Please log in to see your projects and tasks.
+        </p>
+        <p className="text-white">Sign up if you don't have an account!</p>
+      </div>
+    );
+  }
 
   // object with all the routes and their corresponding components to load dynamically
   const sidebarRoutes = {

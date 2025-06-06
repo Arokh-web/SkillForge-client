@@ -1,9 +1,15 @@
 import fetchData from "../../API/fetchData";
 import "./sign.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuthContext } from "../../contexts/contexts";
 
 const SignInUp = () => {
   const navigate = useNavigate();
+  const [expandedSignUp, setExpandedSignUp] = useState(false);
+  const { setUser } = useAuthContext();
+
+  // SIGNUP HANDLER
   const handleClickSignUp = async (e) => {
     e.preventDefault();
     const form = e.target.closest("form");
@@ -27,6 +33,11 @@ const SignInUp = () => {
     }
   };
 
+  const handleExpandSignUp = () => {
+    setExpandedSignUp(!expandedSignUp);
+  };
+
+  // SIGNIN HANDLER
   const handleClickSignIn = async (e) => {
     e.preventDefault();
 
@@ -43,6 +54,7 @@ const SignInUp = () => {
     try {
       const res = await fetchData("POST", "/auth/signin", payload);
       console.log("Sign in successful!");
+      setUser(res);
       navigate("/dashboard"); // Redirect to dashboard after successful sign in
     } catch (error) {
       if (error.response?.status === 401) {
@@ -55,8 +67,7 @@ const SignInUp = () => {
 
   return (
     <div>
-      <div className="welcome">
-        <h1>Welcome to SkillForge</h1>
+      <div className="welcome-container">
         <p>
           Your one-stop solution for skill development and project management.
         </p>
@@ -65,9 +76,9 @@ const SignInUp = () => {
       <div className="sign-container">
         <div className="signin-container">
           {/* LOGIN FORM */}
-          <p>Already have an account?</p>
-          <p>Then sign in:</p>
-          <form>
+
+          <p>Please sign in to get access to your projects:</p>
+          <form className="flex flex-col items-center">
             <input type="text" placeholder="email" name="email" />
             <input type="password" placeholder="password" name="password" />
             <button className="sign-button" onClick={handleClickSignIn}>
@@ -75,18 +86,31 @@ const SignInUp = () => {
             </button>
           </form>
         </div>
+
         {/* SIGNUP FORM */}
-        <div className="signup-container">
-          <p>Don't have an account yet?</p>
-          <p>Then sign up:</p>
-          <form>
-            <input type="text" placeholder="username" name="username" />
-            <input type="email" placeholder="email" name="email" />
-            <input type="password" placeholder="password" name="password" />
-            <button className="sign-button" onClick={handleClickSignUp}>
-              sign up
-            </button>
-          </form>
+        {expandedSignUp && (
+          <div className="signup-container">
+            <p>Don't have an account yet?</p>
+            <p>Then sign up:</p>
+            <form className="flex flex-col items-center">
+              <input type="text" placeholder="username" name="username" />
+              <input type="email" placeholder="email" name="email" />
+              <input type="password" placeholder="password" name="password" />
+              <button className="sign-button" onClick={handleClickSignUp}>
+                sign up
+              </button>
+            </form>
+          </div>
+        )}
+        <div>
+          <button
+            className="sign-button toggle-button"
+            onClick={handleExpandSignUp}
+          >
+            {expandedSignUp
+              ? "Already have an Account? Then sign in!"
+              : "Dont' have an account? Sign up!"}
+          </button>
         </div>
       </div>
     </div>

@@ -45,32 +45,94 @@ function App() {
           <TaskProviderSingle>
             <Routes>
               <Route path="/" element={<Home />}>
+                <Route index element={<SignInUp />} />
+
                 <Route path="signinup" element={<SignInUp />} />
                 {/* USER: PROTECTED AREA STARTS HERE */}
-                <Route element={<UserProtectedRoute />}>
-                  <Route path="dashboard" element={<Dashboard />} />
-                  {/* SHOWS: The PROJECTS page shows ALL the projects of the user. 
+
+                <Route
+                  path="dashboard"
+                  element={
+                    <UserProtectedRoute>
+                      <Dashboard />
+                    </UserProtectedRoute>
+                  }
+                />
+                {/* SHOWS: The PROJECTS page shows ALL the projects of the user. 
           POSSIBILITY: The user can add projects here. 
           WHERE: It is displayed within the hero-component with the sidebar */}
-                  <Route path="projects" element={<Projects />} />
-                  <Route path="projects/new" element={<CreateProject />} />
-                  <Route
-                    path="projects/:projectId"
-                    element={<ProjectDetail />}
-                  />
-                  {/* The task-id-component shows the edittable details of one task. adding notes is possible here. */}
+                <Route
+                  path="projects"
+                  element={
+                    <UserProtectedRoute>
+                      <Projects />
+                    </UserProtectedRoute>
+                  }
+                />
+                <Route
+                  path="projects/new"
+                  element={
+                    <UserProtectedRoute>
+                      <CreateProject />
+                    </UserProtectedRoute>
+                  }
+                />
+                <Route
+                  path="projects/:projectId"
+                  element={
+                    <UserProtectedRoute>
+                      <ProjectDetail />
+                    </UserProtectedRoute>
+                  }
+                />
+                {/* The task-id-component shows the edittable details of one task. adding notes is possible here. */}
 
-                  {/* SHOWS: The TASKS and NOTES page shows ALL the tasks and notes of the user. 
+                {/* SHOWS: The TASKS and NOTES page shows ALL the tasks and notes of the user. 
           POSSIBILITY: The user can add tasks and notes here. 
           WHERE: It is displayed within the hero-component with the sidebar */}
-                  <Route path="tasks" element={<Tasks />} />
-                  <Route path="tasks/:taskId" element={<TaskDetail />} />
-                  <Route path="tasks/new" element={<CreateTaskorNote />} />
-                  <Route path="notes" element={<Notes />} />
-                  <Route path="notes/:noteId" element={<NoteDetail />} />
-                  {/* The task-id-component shows the edittable details of one task. adding tasks is possible here. */}
-                  {/* The note-id-component  shows the edittable details of one note. connecting tasks is possible here. */}
-                </Route>
+                <Route
+                  path="tasks"
+                  element={
+                    <UserProtectedRoute>
+                      <Tasks />
+                    </UserProtectedRoute>
+                  }
+                />
+                <Route
+                  path="tasks/:taskId"
+                  element={
+                    <UserProtectedRoute>
+                      <TaskDetail />
+                    </UserProtectedRoute>
+                  }
+                />
+                <Route
+                  path="tasks/new"
+                  element={
+                    <UserProtectedRoute>
+                      <CreateTaskorNote />
+                    </UserProtectedRoute>
+                  }
+                />
+                <Route
+                  path="notes"
+                  element={
+                    <UserProtectedRoute>
+                      <Notes />
+                    </UserProtectedRoute>
+                  }
+                />
+                <Route
+                  path="notes/:noteId"
+                  element={
+                    <UserProtectedRoute>
+                      <NoteDetail />
+                    </UserProtectedRoute>
+                  }
+                />
+                {/* The task-id-component shows the edittable details of one task. adding tasks is possible here. */}
+                {/* The note-id-component  shows the edittable details of one note. connecting tasks is possible here. */}
+
                 {/* USER: PROTECTED AREA ENDS HERE */}
                 {/* ADMIN: PROTECTED AREA STARTS HERE */}
                 <Route element={<AdminProtectedRoute />}>

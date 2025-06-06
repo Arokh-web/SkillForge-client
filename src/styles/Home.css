@@ -7,7 +7,7 @@
 
 /* SideBar and Hero */
 .sidebar-left {
-  @apply flex flex-col bg-[var(--color-sidebarBg)] rounded-2xl p-5 gap-5 shadow-lg w-1/5 h-[85vh];
+  @apply flex flex-col flex-grow bg-[var(--color-sidebarBg)] rounded-2xl p-5 gap-5 shadow-lg w-1/5 h-[85vh];
 }
 
 .hero-sidebar-placement {

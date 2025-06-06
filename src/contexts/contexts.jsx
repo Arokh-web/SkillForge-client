@@ -22,8 +22,15 @@ export const ProjectProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState([]);
+  const { user } = useAuthContext();
 
   useEffect(() => {
+    if (!user?.id) {
+      console.log("No user ID found, skipping project fetch.");
+      setLoading(false);
+      return;
+    }
+
     const getProjects = async () => {
       setLoading(true);
       const rawProjects = await fetchData("GET", "/api/projects");
@@ -32,11 +39,10 @@ export const ProjectProvider = ({ children }) => {
         selected: false,
       }));
       setProjects(projects);
-
       setLoading(false);
     };
     getProjects();
-  }, []);
+  }, [user]);
 
   return (
     <ProjectContext.Provider
@@ -88,33 +94,40 @@ export const TaskProviderSingle = ({ children }) => {
   const { selectedProject } = useProjectContext();
 
   useEffect(() => {
+    if (!selectedProject?.id) {
+      console.log("No project selected, skipping task fetch.");
+      return;
+    }
+
     const getTasks = async () => {
-      if (!selectedProject?.id) {
-        console.log("No project selected, skipping task fetch.");
-        return;
-      }
       setLoading(true);
-      const rawTasks = await fetchData(
-        "GET",
-        "/api/tasks/projects/" + selectedProject.id
-      );
-      const tasks = rawTasks.map((task) => ({
-        ...task,
-        selected: false, // Initialize selected state for each task; not in the API!
-      }));
+      try {
+        const rawTasks = await fetchData(
+          "GET",
+          "/api/tasks/projects/" + selectedProject.id
+        );
 
-      setTasks(tasks);
+        const tasks = rawTasks.map((task) => ({
+          ...task,
+          selected: false, // Initialize selected state for each task; not in the API!
+        }));
 
-      setTaskCount((prev) => ({
-        ...prev,
-        [selectedProject.id]: tasks.length,
-      }));
+        setTasks(tasks);
 
-      setLoading(false);
-      console.log("Count of corresponding tasks:", tasks.length);
+        setTaskCount((prev) => ({
+          ...prev,
+          [selectedProject.id]: tasks.length,
+        }));
+
+        console.log("Count of corresponding tasks:", tasks.length);
+      } catch (e) {
+        console.error("Error fetching tasks:", e);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    getTasks(selectedProject.id);
+    getTasks();
   }, [selectedProject]);
 
   return (
@@ -138,17 +151,30 @@ export const TaskProviderSingle = ({ children }) => {
 export const NoteProviderAll = ({ children }) => {
   const [allNotes, setAllNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuthContext();
 
   useEffect(() => {
     const getNotes = async () => {
-      setLoading(true);
-      const data = await fetchData("GET", "/api/notes");
-      console.log(data);
-      setAllNotes(data);
-      setLoading(false);
+      if (!user?.id) {
+        console.log("No user ID found, skipping note fetch.");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const data = await fetchData("GET", "/api/notes");
+        console.log(data);
+        setAllNotes(data);
+      } catch (e) {
+        console.error("Error fetching notes:", e);
+      } finally {
+        setLoading(false);
+      }
     };
+
     getNotes();
-  }, []);
+  }, [user]);
 
   return (
     <NoteContextAll.Provider
@@ -177,22 +203,34 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const checkAuth = async () => {
       setLoading(true);
+
       try {
         const data = await fetchData("GET", `/auth/me/`);
         console.log("Fetched user data!");
         setUser(data);
+        console.log("User data:", data);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        if (error.response?.status === 401 || error.response?.status === 500) {
+          console.log("Unauthorized, no user data found or no cookie set.");
+          setUser(null);
+          setLoading(false);
+        } else {
+          console.error("Error fetching user data:", error);
+          setLoading(false);
+        }
         setUser(null);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUser();
-  }, []);
+    // user?.id
+    //   ? checkAuth()
+    //   : console.log("No user ID found, skipping auth check.");
+    checkAuth();
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
