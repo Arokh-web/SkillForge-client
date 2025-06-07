@@ -2,7 +2,8 @@
 
 /* STYLES FOR CREATION FORMS */
 
-.create-project-container {
+.create-project-container,
+.create-task-container {
   @apply flex flex-col;
 }
 

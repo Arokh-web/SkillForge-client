@@ -3,6 +3,7 @@ import React from "react";
 import { useTaskContextSingle } from "../../contexts/contexts.jsx";
 import { useState } from "react";
 import { changePinnedStatus } from "../../contexts/contexts.jsx";
+import fetchData from "../../API/fetchData.js";
 
 const Tasks = () => {
   const { setTasks, tasks, loading } = useTaskContextSingle();
@@ -21,6 +22,16 @@ const Tasks = () => {
     setTasks((prevTasks) =>
       prevTasks.map((t) => (t.id === task.id ? { ...t, pinned: value } : t))
     );
+  };
+
+  const handleClickDelete = async (id) => {
+    try {
+      const response = await fetchData("DELETE", "/api/tasks/" + id);
+      setTasks((prev) => prev.filter((task) => task.id !== id));
+      console.log("Task deleted:", response);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
   };
 
   return (
@@ -122,7 +133,12 @@ const Tasks = () => {
                       </button>
 
                       <button className="t-edit-button">Edit</button>
-                      <button className="t-delete-button">Delete</button>
+                      <button
+                        className="t-delete-button"
+                        onClick={() => handleClickDelete(task.id)}
+                      >
+                        Delete
+                      </button>
                       <button
                         className="t-pin-button"
                         onClick={() => handlePinned(task, !task.pinned)}

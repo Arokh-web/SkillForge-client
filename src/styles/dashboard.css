@@ -15,7 +15,7 @@
 }
 
 .task-select {
-  @apply w-full rounded-xl p-2;
+  @apply w-full rounded-xl;
 }
 
 .selected-project {
@@ -23,7 +23,7 @@
 }
 
 .selected-task {
-  @apply bg-[var(--color-selectedTaskBg)] rounded-2xl;
+  @apply bg-[var(--color-selectedTaskBg)] rounded p-1;
 }
 
 .side-menu-buttons-container {
@@ -54,4 +54,8 @@
 
 .task-tbody {
   @apply flex m-4 w-200 flex-col;
+}
+
+.task-item {
+  @apply m-2;
 }

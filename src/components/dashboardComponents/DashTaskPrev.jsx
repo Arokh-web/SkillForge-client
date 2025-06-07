@@ -49,22 +49,31 @@ const DashTaskPrev = () => {
                     <p className="text-xs">{task.deadline}</p>
                   </td>
                 </tr>
-                <button
-                  className="sign-button text-sm h-3 w-5"
-                  onClick={() => setExpanded(!expanded)}
-                >
-                  {expanded ? "Hide" : "Show"}
-                </button>
+
                 {expanded ? (
                   <tr>
                     <td colSpan="1" className="task-content">
                       <p className="text-xs">{task.content}</p>
                     </td>
-                    <td colSpan="2"></td>
+                    <td colSpan="2">
+                      <button
+                        className="sign-button text-sm h-3 w-5"
+                        onClick={() => setExpanded(!expanded)}
+                      >
+                        {expanded ? "Hide" : "Show"}
+                      </button>
+                    </td>
                   </tr>
                 ) : (
                   <tr>
-                    <td colSpan="3"></td>
+                    <td colSpan="3">
+                      <button
+                        className="sign-button text-sm h-3 w-5"
+                        onClick={() => setExpanded(!expanded)}
+                      >
+                        {expanded ? "Hide" : "Show"}
+                      </button>
+                    </td>
                   </tr>
                 )}
 

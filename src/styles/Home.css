@@ -27,7 +27,7 @@
 /* HEADER */
 /* Container contains everything in the HEADER */
 .header-container {
-  @apply flex gap-2 text-[var(--color-textMain)] h-[10vh];
+  @apply flex gap-2 text-[var(--color-textMain)] h-[10vh] p-2;
   font-family: var(--font-family-logo);
   font-size: 2rem;
 }
