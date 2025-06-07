@@ -3,14 +3,26 @@
 import ProjectDropDown from "./SideProjectDropDown";
 import TaskList from "./SideTaskList";
 import MenuLeft from "./MenuLeft";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../../contexts/contexts";
 import AdminNavigation from "./AdminNavigation";
+import { useEffect } from "react";
 
 const SideBarLeft = () => {
   const { user } = useAuthContext();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) return;
+
+    if (user.role === "admin" && location.pathname === "/signinup") {
+      navigate("/adminpage");
+    } else if (user.role === "user" && location.pathname === "/signinup") {
+      navigate("/dashboard");
+    }
+  }, [user, location.pathname, navigate]);
 
   if (!user) {
     return (
