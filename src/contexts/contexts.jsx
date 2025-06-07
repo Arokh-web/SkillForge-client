@@ -201,15 +201,26 @@ export const changePinnedStatus = (task, value) => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checkSession, setCheckSession] = useState(true);
 
   useEffect(() => {
+    if (!checkSession) {
+      console.log("No session check requested, skipping auth check.");
+      setLoading(false);
+      return;
+    }
+    console.log("Checking authentication status...");
     const checkAuth = async () => {
       setLoading(true);
 
       try {
-        const data = await fetchData("GET", `/auth/me/`, );
+        const data = await fetchData("GET", `/auth/me`, {
+          withCredentials: true,
+        });
         console.log("Fetched user data!");
         setUser(data);
+        setIsAuthenticated(true);
         console.log("User data:", data);
       } catch (error) {
         if (error.response?.status === 401 || error.response?.status === 500) {
@@ -223,17 +234,26 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
       } finally {
         setLoading(false);
+        setCheckSession(false);
       }
     };
 
-    // user?.id
-    //   ? checkAuth()
-    //   : console.log("No user ID found, skipping auth check.");
     checkAuth();
-  }, []);
+  }, [checkSession]);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        checkSession,
+        setCheckSession,
+        user,
+        setUser,
+        loading,
+        setLoading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

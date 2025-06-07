@@ -7,7 +7,19 @@ import { useAuthContext } from "../../contexts/contexts";
 const SignInUp = () => {
   const navigate = useNavigate();
   const [expandedSignUp, setExpandedSignUp] = useState(false);
-  const { setUser } = useAuthContext();
+  const {
+    user,
+    setUser,
+    setIsAuthenticated,
+    setCheckSession,
+    isAuthenticated,
+  } = useAuthContext();
+
+  // if (isAuthenticated && user) {
+  //   return user.role === "admin"
+  //     ? navigate("/adminpage")
+  //     : navigate("/dashboard");
+  // }
 
   // SIGNUP HANDLER
   const handleClickSignUp = async (e) => {
@@ -23,6 +35,8 @@ const SignInUp = () => {
 
     try {
       const res = await fetchData("POST", "/auth/signup", payload);
+      setCheckSession(true);
+      setIsAuthenticated(true);
       console.log("Sign up successful!");
     } catch (error) {
       if (error.response?.status === 409) {
@@ -55,6 +69,8 @@ const SignInUp = () => {
       const res = await fetchData("POST", "/auth/signin", payload);
       console.log("Sign in successful!");
       setUser(res);
+      setCheckSession(true);
+      setIsAuthenticated(true);
       navigate("/dashboard"); // Redirect to dashboard after successful sign in
     } catch (error) {
       if (error.response?.status === 401) {

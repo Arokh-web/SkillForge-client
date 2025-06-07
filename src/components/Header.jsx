@@ -10,8 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleClickLogout = async () => {
-    
-    await fetchData("POST", "/auth/signout", );
+    await fetchData("POST", "/auth/signout");
     // Clear user state and navigate to signinup page
     setUser(null);
     navigate("signinup");
@@ -28,6 +27,9 @@ const Header = () => {
         <div className="menubar">
           <div className="title">
             <Link to="/">SkillForge</Link>
+          </div>
+          <div>
+            <p>{user?.username ? `Welcome ${user.username}` : ""}</p>
           </div>
           <div className="header-buttons">
             <div className="justify-left">
