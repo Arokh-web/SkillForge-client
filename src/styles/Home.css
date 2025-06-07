@@ -93,5 +93,9 @@
   @apply bg-green-100;
 }
 
+.account-icon {
+  @apply rounded-full;
+}
+
 /* FOOTER */
 /* Container contains everything in the FOOTER */

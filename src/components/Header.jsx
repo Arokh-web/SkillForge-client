@@ -48,7 +48,7 @@ const Header = () => {
             </div>
             <div className="account-button">
               <button className="account-btn">
-                <img src="account.png" className="account-icon" />
+                <img src={user?.profile_pic} className="account-icon" />
               </button>
             </div>
           </div>
