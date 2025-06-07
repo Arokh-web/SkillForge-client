@@ -2,7 +2,8 @@
 import "./styles/App.css";
 import "./styles/Home.css";
 import "./styles/dashboard.css";
-import "./styles/projectAndTaskList.css";
+import "./components/TaskAndProjectList/projectAndTaskList.css";
+import "./components/TaskAndProjectList/creation.css";
 
 // Import of components (displayed in hero.jsx)
 // DATA lists:

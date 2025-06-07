@@ -1,9 +1,10 @@
 import { useTaskContextSingle } from "../../contexts/contexts";
 import fetchData from "../../API/fetchData";
-import React from "react";
+import React, { useState } from "react";
 
 const DashTaskPrev = () => {
   const { selectedTask, setSelectedTask } = useTaskContextSingle();
+  const [expanded, setExpanded] = useState(false);
 
   console.log("Selected Tasks:", selectedTask);
 
@@ -27,15 +28,7 @@ const DashTaskPrev = () => {
     <div className="dash-task-prev">
       <p className="sub-title ">Overview Selected Tasks:</p>
       <table className="task-table">
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Description</th>
-            <th>To be done until</th>
-          </tr>
-        </thead>
-
-        <tbody>
+        <tbody className="task-tbody">
           {selectedTask.length === 0 ? (
             <tr>
               <td colSpan="3">
@@ -48,23 +41,35 @@ const DashTaskPrev = () => {
             selectedTask.map((task) => (
               <React.Fragment key={task.id}>
                 <tr key={`${task.id}-row}`} className="task-item">
-                  <td colSpan="1">
+                  <td className="task-col" colSpan="1">
                     <p className="text-sm font-medium">{task.title}</p>
                   </td>
-                  <td></td>
-                  <td colSpan="1">
+                  <td className="task-col"></td>
+                  <td className="task-col" colSpan="1">
                     <p className="text-xs">{task.deadline}</p>
                   </td>
                 </tr>
-                <tr>
-                  <td colSpan="2">
-                    <p className="text-xs">{task.content}</p>
-                  </td>
-                  <td></td>
-                </tr>
+                <button
+                  className="sign-button text-sm h-3 w-5"
+                  onClick={() => setExpanded(!expanded)}
+                >
+                  {expanded ? "Hide" : "Show"}
+                </button>
+                {expanded ? (
+                  <tr>
+                    <td colSpan="1" className="task-content">
+                      <p className="text-xs">{task.content}</p>
+                    </td>
+                    <td colSpan="2"></td>
+                  </tr>
+                ) : (
+                  <tr>
+                    <td colSpan="3"></td>
+                  </tr>
+                )}
 
                 <tr key={`${task.id}-radio}`} className="task-radiobuttons">
-                  <td>
+                  <td className="task-col">
                     Done?
                     <input
                       type="radio"
@@ -77,7 +82,7 @@ const DashTaskPrev = () => {
                       }
                     />
                   </td>
-                  <td>
+                  <td className="task-col">
                     Active?
                     <input
                       type="radio"
@@ -90,7 +95,7 @@ const DashTaskPrev = () => {
                       }
                     />
                   </td>
-                  <td>
+                  <td className="task-col">
                     Planned?
                     <input
                       type="radio"

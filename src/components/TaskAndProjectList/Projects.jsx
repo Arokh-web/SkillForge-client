@@ -2,10 +2,12 @@
 import { useProjectContext } from "../../contexts/contexts.jsx";
 import { useState } from "react";
 import { useTaskContextSingle } from "../../contexts/contexts.jsx";
+import fetchData from "../../API/fetchData.js";
 
 const Projects = () => {
   // setting necessary States
-  const { projects, loading, setSelectedProject } = useProjectContext();
+  const { setProjects, projects, loading, setSelectedProject } =
+    useProjectContext();
   const { tasks, taskCount } = useTaskContextSingle();
   const [expandedDesc, setExpandedDesc] = useState({});
   const [expandedInfo, setExpandedInfo] = useState({});
@@ -32,6 +34,15 @@ const Projects = () => {
       ...prev,
       [id]: !prev[id],
     }));
+  };
+
+  const handleClickDelete = async (id) => {
+    try {
+      const response = await fetchData("DELETE", "/api/projects/" + id);
+      setProjects((prev) => prev.filter((project) => project.id !== id));
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
   };
 
   return (
@@ -129,7 +140,12 @@ const Projects = () => {
                 </div>
                 <div className="flex items-center gap-5">
                   <button className="p-edit-button">Edit</button>
-                  <button className="p-delete-button">Delete</button>
+                  <button
+                    className="p-delete-button"
+                    onClick={(e) => handleClickDelete(project.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
