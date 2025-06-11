@@ -15,12 +15,6 @@ const SignInUp = () => {
     isAuthenticated,
   } = useAuthContext();
 
-  // if (isAuthenticated && user) {
-  //   return user.role === "admin"
-  //     ? navigate("/adminpage")
-  //     : navigate("/dashboard");
-  // }
-
   // SIGNUP HANDLER
   const handleClickSignUp = async (e) => {
     e.preventDefault();
@@ -31,15 +25,21 @@ const SignInUp = () => {
       username: formData.get("username"),
       email: formData.get("email"),
       password: formData.get("password"),
+      role: "user", // Default role for new users
     };
 
     try {
+      console.log("Payload:", payload);
+      console.log("Sending sign up request...");
       const res = await fetchData("POST", "/auth/signup", payload);
-      setCheckSession(true);
+      console.log("Sign up response:", res);
+      setUser(res);
       setIsAuthenticated(true);
+      setCheckSession(true);
+      navigate("/dashboard"); // Redirect to dashboard after successful sign up
       console.log("Sign up successful!");
     } catch (error) {
-      if (error.response?.status === 409) {
+      if (error.response?.status === 400) {
         console.error("Email already exists. Please use a different email.");
       } else {
         console.error("An error occurred during sign up:", error);

@@ -6,7 +6,7 @@ input {
 
 .sign-button {
   @apply flex items-center justify-center bg-gradient-to-r from-amber-400 to-yellow-600 font-semibold 
-  px-6 py-2 rounded-full shadow-md h-8 w-fit h-fit
+  px-6 py-2 rounded-full shadow-md w-fit h-fit
   hover:shadow-lg hover:from-amber-500 hover:to-yellow-700 transition-all duration-200;
 }
 

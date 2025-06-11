@@ -5,19 +5,27 @@ import {
   useTaskContextSingle,
 } from "../../contexts/contexts";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const CreateTaskorNote = () => {
+  const location = useLocation();
+  const isEditMode = location.pathname.includes("edit");
   const navigate = useNavigate();
-  const { tasks, setTasks } = useTaskContextSingle();
-  const { setProjects, selectedProject } = useProjectContext();
-  const [taskData, setTaskData] = useState({
-    title: "",
-    content: "",
-    status: "",
-    deadline: "",
-    priority: "",
-    pinned: false,
+  const { setTasks } = useTaskContextSingle();
+  const { selectedProject } = useProjectContext();
+  const [taskData, setTaskData] = useState(() => {
+    return isEditMode && location.state?.taskToEdit
+      ? location.state.taskToEdit
+      : {
+          title: "",
+          content: "",
+          status: "",
+          deadline: "",
+          priority: "",
+          pinned: false,
+        };
   });
+
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
@@ -39,6 +47,21 @@ const CreateTaskorNote = () => {
       selectedProject.id === undefined
     ) {
       setErrorMessage("Please fill in all required fields.");
+      return;
+    }
+
+    if (isEditMode) {
+      const { id, ...updatedTaskData } = taskData;
+      const res = await fetchData(
+        "PUT",
+        `/api/tasks/${taskData.id}`,
+        updatedTaskData
+      );
+      console.log("Task updated:", res);
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task.id === res.id ? res : task))
+      );
+      navigate(`/tasks`);
       return;
     }
 

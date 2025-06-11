@@ -4,10 +4,12 @@ import { useTaskContextSingle } from "../../contexts/contexts.jsx";
 import { useState } from "react";
 import { changePinnedStatus } from "../../contexts/contexts.jsx";
 import fetchData from "../../API/fetchData.js";
+import { useNavigate } from "react-router-dom";
 
 const Tasks = () => {
   const { setTasks, tasks, loading } = useTaskContextSingle();
   const [expandedDesc, setExpandedDesc] = useState({});
+  const navigate = useNavigate();
 
   const toggleDescExpand = (id) => {
     setExpandedDesc((prev) => ({
@@ -32,6 +34,12 @@ const Tasks = () => {
     } catch (error) {
       console.error("Error deleting task:", error);
     }
+  };
+
+  const handleClickEdit = (task) => {
+    navigate(`/tasks/${task.id}/edit`, {
+      state: { taskToEdit: task },
+    });
   };
 
   return (
@@ -132,7 +140,12 @@ const Tasks = () => {
                         {expandedDesc[task.id] ? "Hide Desc" : "Show Desc"}
                       </button>
 
-                      <button className="t-edit-button">Edit</button>
+                      <button
+                        className="t-edit-button"
+                        onClick={() => handleClickEdit(task)}
+                      >
+                        Edit
+                      </button>
                       <button
                         className="t-delete-button"
                         onClick={() => handleClickDelete(task.id)}

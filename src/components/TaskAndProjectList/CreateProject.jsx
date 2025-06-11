@@ -1,16 +1,25 @@
 import React from "react";
 import fetchData from "../../API/fetchData";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useProjectContext } from "../../contexts/contexts";
+import { useLocation } from "react-router-dom";
 
 const CreateProject = () => {
-  const [projectData, setProjectData] = useState({
-    title: "",
-    content: "",
-    status: "",
-    deadline: "",
-    priority: "",
-    pinned: false,
+  const location = useLocation();
+  const isEditMode = location.pathname.includes("edit");
+  const { setProjects } = useProjectContext();
+  const [projectData, setProjectData] = useState(() => {
+    return isEditMode && location.state?.projectToEdit
+      ? location.state.projectToEdit
+      : {
+          title: "",
+          content: "",
+          status: "",
+          deadline: "",
+          priority: "",
+          pinned: false,
+        };
   });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -33,13 +42,50 @@ const CreateProject = () => {
 
     setErrorMessage("");
 
-    const response = await fetchData("POST", "/api/projects", projectData);
-    console.log("Project created:", response);
+    // UPDATE PROJECT
+    if (isEditMode) {
+      console.log("Updating project:", projectData);
+      const { id, user_id, createdAt, updatedAt, ...dataToUpdate } =
+        projectData;
+      const response = await fetchData(
+        "PATCH",
+        "/api/projects/" + id,
+        dataToUpdate
+      );
+      console.log("Project updated:", response);
+      setProjects((prevProjects) =>
+        prevProjects.map((project) =>
+          project.id === response.id ? response : project
+        )
+      );
+      navigate("/projects");
+
+      return;
+    } else {
+      // CREATE PROJECT
+      const response = await fetchData("POST", "/api/projects", projectData);
+      console.log("Project created:", response);
+      navigate("/projects");
+      setProjectData({
+        title: "",
+        content: "",
+        status: "",
+        deadline: "",
+        priority: "",
+        pinned: false,
+      });
+      setProjects((prevProjects) => [...prevProjects, response]);
+    }
   };
+
+  console.log("Project data:", projectData);
+  console.log("Is edit mode:", isEditMode);
 
   return (
     <div>
-      <h1 className="title">Create a Project</h1>
+      <h1 className={isEditMode ? "title text-red-900" : "title"}>
+        {isEditMode ? `Edit ${projectData.title}` : "Create a Project"}
+      </h1>
       <form onSubmit={handleSubmit} className="create-project-container">
         <div className="field">
           <label className="form-tag">Title</label>
@@ -136,7 +182,7 @@ const CreateProject = () => {
         </div>
         {errorMessage && <span className="text-red-700">{errorMessage}</span>}
         <button type="submit" className="sign-button">
-          Create Project{" "}
+          {isEditMode ? "Update Project" : "Create Project"}
         </button>
       </form>
     </div>

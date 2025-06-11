@@ -3,9 +3,11 @@ import { useProjectContext } from "../../contexts/contexts.jsx";
 import { useState } from "react";
 import { useTaskContextSingle } from "../../contexts/contexts.jsx";
 import fetchData from "../../API/fetchData.js";
+import { useNavigate } from "react-router-dom";
 
 const Projects = () => {
   // setting necessary States
+  const navigate = useNavigate();
   const { setProjects, projects, loading, setSelectedProject } =
     useProjectContext();
   const { tasks, taskCount } = useTaskContextSingle();
@@ -36,6 +38,12 @@ const Projects = () => {
     }));
   };
 
+  const handleClickEdit = (project) => {
+    navigate(`/projects/${project.id}/edit`, {
+      state: { projectToEdit: project },
+    });
+  };
+
   const handleClickDelete = async (id) => {
     try {
       const response = await fetchData("DELETE", "/api/projects/" + id);
@@ -60,11 +68,12 @@ const Projects = () => {
                   {project.title}
                   <div
                     className={`${
-                      project.status === "active"
+                      project.status === "active" || project.status === "Active"
                         ? "text-green-500"
-                        : project.status === "planning"
+                        : project.status === "planning" ||
+                          project.status === "Planning"
                         ? "text-yellow-600"
-                        : project.status === "done"
+                        : project.status === "done" || project.status === "Done"
                         ? "text-red-600"
                         : "text-gray-500"
                     }`}
@@ -89,16 +98,17 @@ const Projects = () => {
                     }`}
                   >
                     <div className={"p-info-container"}>
-                      <p className="p-data-title">Created by: </p>
-                      <p>{project.user_id}</p>
                       <p className="p-data-title">Priority: </p>
                       <p
                         className={`${
-                          project.priority === "low"
+                          project.priority === "low" ||
+                          project.priority === "Low"
                             ? "text-green-400 font-bold"
-                            : project.priority === "medium"
+                            : project.priority === "medium" ||
+                              project.priority === "Medium"
                             ? "text-yellow-600 font-bold"
-                            : project.priority === "high"
+                            : project.priority === "high" ||
+                              project.priority === "High"
                             ? "text-red-600 font-bold"
                             : "text-gray-500 font-bold"
                         }`}
@@ -118,34 +128,38 @@ const Projects = () => {
                       <p>{project.createdAt}</p>
                     </div>
                   </div>
-                </div>
-              </div>
-              {/* START of button container */}
-              <div className="p-buttons-container itrems-center">
-                <div className="flex items-center gap-5">
-                  <button
-                    name={`p-toggle-btn-${project.id}`}
-                    className={`p-button`}
-                    onClick={() => toggleDescExpand(project.id)}
-                  >
-                    {expandedDesc[project.id] ? "Hide Desc" : "Show Desc"}
-                  </button>
-                  <button
-                    name={`p-info-toggle-btn-${project.id}`}
-                    className={`p-button`}
-                    onClick={() => toggleInfoExpand(project.id)}
-                  >
-                    {expandedInfo[project.id] ? "Hide Info" : "Show Info"}
-                  </button>
-                </div>
-                <div className="flex items-center gap-5">
-                  <button className="p-edit-button">Edit</button>
-                  <button
-                    className="p-delete-button"
-                    onClick={(e) => handleClickDelete(project.id)}
-                  >
-                    Delete
-                  </button>
+                  {/* START of button container */}
+                  <div className="p-buttons-container itrems-center ">
+                    <button
+                      name={`p-toggle-btn-${project.id}`}
+                      className={`p-button`}
+                      onClick={() => toggleDescExpand(project.id)}
+                    >
+                      {expandedDesc[project.id]
+                        ? "Full description"
+                        : "Hide description"}
+                    </button>
+                    <button
+                      name={`p-info-toggle-btn-${project.id}`}
+                      className={`p-button`}
+                      onClick={() => toggleInfoExpand(project.id)}
+                    >
+                      {expandedInfo[project.id] ? "Hide Info" : "Show Info"}
+                    </button>
+
+                    <button
+                      className="p-button"
+                      onClick={() => handleClickEdit(project)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="p-button"
+                      onClick={(e) => handleClickDelete(project.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

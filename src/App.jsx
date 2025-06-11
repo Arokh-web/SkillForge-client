@@ -86,6 +86,14 @@ function App() {
                     </UserProtectedRoute>
                   }
                 />
+                <Route
+                  path="projects/:projectId/edit"
+                  element={
+                    <UserProtectedRoute>
+                      <CreateProject />
+                    </UserProtectedRoute>
+                  }
+                />
                 {/* The task-id-component shows the edittable details of one task. adding notes is possible here. */}
 
                 {/* SHOWS: The TASKS and NOTES page shows ALL the tasks and notes of the user. 
@@ -109,6 +117,14 @@ function App() {
                 />
                 <Route
                   path="tasks/new"
+                  element={
+                    <UserProtectedRoute>
+                      <CreateTaskorNote />
+                    </UserProtectedRoute>
+                  }
+                />
+                <Route
+                  path="tasks/:taskId/edit"
                   element={
                     <UserProtectedRoute>
                       <CreateTaskorNote />
