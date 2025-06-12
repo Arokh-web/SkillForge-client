@@ -28,28 +28,43 @@ const Header = () => {
           <div className="title">
             <Link to="/">SkillForge</Link>
           </div>
-          <div>
-            <p>{user?.username ? `Welcome ${user.username}` : ""}</p>
+          <div className="flex gap-15">
+            <p>
+              {user?.username
+                ? `Welcome ${
+                    user.username.charAt(0).toUpperCase() +
+                    user.username.slice(1)
+                  }!`
+                : ""}
+            </p>
+            <Link to="dashboard">Dashboard</Link>
           </div>
           <div className="header-buttons">
-            <div className="justify-left">
-              <Link to="dashboard">Go to Dashboard (Overview)</Link>
-              <Link to="projects">Projects</Link>
-              <Link to="tasks">Tasks</Link>
+            <div className="">
               {user?.role === "admin" ? (
                 <Link to="adminpage">AdminPage</Link>
               ) : null}
             </div>
             <div className="dark-mode-button"></div>
-            <div className="logout-button">
-              <button className="logout-btn" onClick={handleClickLogout}>
-                X
-              </button>
+            <div className="logout-button flex flex-wrap group">
+              <button
+                onClick={handleClickLogout}
+                className="h-6 w-6 flex cursor-pointer"
+              ></button>
+              <p className="flex cursor-pointer font-mono text-xs group opacity-0 group-hover:opacity-100">
+                Sign out
+              </p>
             </div>
-            <div className="account-button">
-              <button className="account-btn">
-                <img src={user?.profile_pic} className="account-icon" />
+            <div className="group flex flex-wrap account-button">
+              <button className="flex account-btn">
+                <img
+                  src={user?.profile_pic}
+                  className="account-icon cursor-pointer "
+                />
               </button>
+              <p className="flex cursor-pointer font-mono text-xs group opacity-0 group-hover:opacity-100">
+                Account
+              </p>
             </div>
           </div>
         </div>

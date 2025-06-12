@@ -45,17 +45,6 @@
 .task-col {
   @apply w-1/5;
 }
-
-/* dashboard content */
-
-.task-table {
-  @apply bg-[var(--color-selectedTaskBg)] rounded-xl overflow-y-auto;
-}
-
-.task-tbody {
-  @apply flex m-4 w-200 flex-col;
-}
-
 .task-item {
   @apply m-2;
 }
@@ -63,6 +52,8 @@
 .task-item:hover {
   @apply bg-[var(--color-selectedTaskBg)] rounded cursor-pointer hover:opacity-60 transition;
 }
+
+/* dashboard content: selected tasks list */
 
 .dash-graph {
   @apply h-50 w-100;
@@ -77,5 +68,5 @@
 }
 
 .task-select-row {
-  @apply flex font-semibold px-2 py-1 rounded hover:bg-sky-100 cursor-pointer items-center;
+  @apply flex font-semibold px-2 py-1 rounded hover:bg-[var(--color-selectedTaskBg)] cursor-pointer items-center;
 }

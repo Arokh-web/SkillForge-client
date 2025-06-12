@@ -1,6 +1,6 @@
 import React from "react";
 import fetchData from "../../API/fetchData";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useProjectContext } from "../../contexts/contexts";
 import { useLocation } from "react-router-dom";
@@ -44,22 +44,33 @@ const CreateProject = () => {
 
     // UPDATE PROJECT
     if (isEditMode) {
-      console.log("Updating project:", projectData);
-      const { id, user_id, createdAt, updatedAt, ...dataToUpdate } =
+      // destructure the projectData to remove unwanted fields
+      const { id, user_id, createdAt, updatedAt, selected, ...rawUpdateData } =
         projectData;
+
+      // clean the rawUpdateData to remove empty or undefined values (will be changed later)
+      const cleanDataToUpdate = {};
+      for (const key in rawUpdateData) {
+        const value = rawUpdateData[key];
+        if (value !== "" && value !== undefined && value !== null) {
+          cleanDataToUpdate[key] = value;
+        }
+      }
+
+      console.log("Updating project:", cleanDataToUpdate);
+
       const response = await fetchData(
         "PATCH",
         "/api/projects/" + id,
-        dataToUpdate
+        cleanDataToUpdate
       );
-      console.log("Project updated:", response);
+
       setProjects((prevProjects) =>
         prevProjects.map((project) =>
           project.id === response.id ? response : project
         )
       );
       navigate("/projects");
-
       return;
     } else {
       // CREATE PROJECT

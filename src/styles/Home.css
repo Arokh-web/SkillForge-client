@@ -78,7 +78,7 @@
 }
 
 .logout-button {
-  @apply flex bg-[var(--color-logout)] rounded-4xl w-6 h-6 text-sm text-center items-center justify-center;
+  @apply bg-[var(--color-logout)] rounded-4xl w-6 h-6 text-sm;
 }
 
 .logout-button:hover {

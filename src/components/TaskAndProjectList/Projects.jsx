@@ -136,15 +136,15 @@ const Projects = () => {
                       onClick={() => toggleDescExpand(project.id)}
                     >
                       {expandedDesc[project.id]
-                        ? "Full description"
-                        : "Hide description"}
+                        ? "Hide description"
+                        : "Full description"}
                     </button>
                     <button
                       name={`p-info-toggle-btn-${project.id}`}
                       className={`p-button`}
                       onClick={() => toggleInfoExpand(project.id)}
                     >
-                      {expandedInfo[project.id] ? "Hide Info" : "Show Info"}
+                      {expandedInfo[project.id] ? "Show Info" : "Hide Info"}
                     </button>
 
                     <button
