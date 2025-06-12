@@ -6,7 +6,7 @@ import { useTaskContextSingle } from "../../contexts/contexts";
 const TaskList = () => {
   const { tasks, setTasks, setSelectedTask, selectedTask } =
     useTaskContextSingle();
-  const [returnMessage, setReturnMessage] = useState("");
+
   const [selectedCount, setSelectedCount] = useState();
 
   const handleSelect = (id) => {
@@ -23,7 +23,7 @@ const TaskList = () => {
         if (task.selected) {
           return { ...task, selected: false };
           // if the task is not selected (=false), check how many tasks are selected
-        } else if (selectedCount < 3) {
+        } else if (selectedCount < 6) {
           return { ...task, selected: true };
         } else {
           // if the task is not selected (=false) and 3 tasks are already selected, return it as unselected
@@ -39,11 +39,6 @@ const TaskList = () => {
     const selected = tasks.filter((task) => task.selected);
     setSelectedCount(selected.length);
     setSelectedTask(selected);
-    selectedCount === 3
-      ? setReturnMessage(
-          `You have selected ${selectedCount} task(s): No more than three tasks can be selected!`
-        )
-      : setReturnMessage("");
   }, [tasks]);
 
   if (!tasks) return <div>Loading tasks...</div>;
@@ -61,13 +56,6 @@ const TaskList = () => {
           </p>
         </div>
       ))}
-      <div>
-        {returnMessage && (
-          <div className="return-message">
-            <p>{returnMessage}</p>
-          </div>
-        )}
-      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 // Import of styles
 import "./styles/App.css";
 import "./styles/Home.css";
-import "./styles/dashboard.css";
+import "./components/dashboardComponents/dashboard.css";
 import "./components/TaskAndProjectList/projectAndTaskList.css";
 import "./components/TaskAndProjectList/creation.css";
 
