@@ -45,7 +45,7 @@ const Tasks = () => {
   return (
     <div>
       {loading ? (
-        <p>Choose a project on the left.</p>
+        <p>Choose a project on the left to view its tasks.</p>
       ) : (
         <div className="tasks-container">
           {tasks.length > 0 ? (
