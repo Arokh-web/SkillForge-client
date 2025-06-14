@@ -6,7 +6,7 @@ import fetchData from "../API/fetchData";
 
 const Header = () => {
   // const [darkMode, setDarkMode] = useState(false);
-  const { user, setUser } = useAuthContext();
+  const { user, setUser, isAuthenticated } = useAuthContext();
   const navigate = useNavigate();
 
   const handleClickLogout = async () => {
@@ -37,7 +37,7 @@ const Header = () => {
                   }!`
                 : ""}
             </p>
-            <Link to="dashboard">Dashboard</Link>
+            {isAuthenticated ? <Link to="dashboard">Dashboard</Link> : ""}
           </div>
           <div className="header-buttons">
             <div className="">
@@ -55,17 +55,19 @@ const Header = () => {
                 Sign out
               </p>
             </div>
-            <div className="group flex flex-wrap account-button">
-              <button className="flex account-btn">
-                <img
-                  src={user?.profile_pic}
-                  className="account-icon cursor-pointer "
-                />
-              </button>
-              <p className="flex cursor-pointer font-mono text-xs group opacity-0 group-hover:opacity-100">
-                Account
-              </p>
-            </div>
+            <Link to="profile">
+              <div className="group flex flex-wrap account-button">
+                <button className="flex account-btn">
+                  <img
+                    src={user?.profile_pic}
+                    className="account-icon cursor-pointer "
+                  />
+                </button>
+                <p className="flex cursor-pointer font-mono text-xs group opacity-0 group-hover:opacity-100">
+                  Account
+                </p>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

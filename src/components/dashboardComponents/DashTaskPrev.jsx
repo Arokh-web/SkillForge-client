@@ -1,10 +1,12 @@
 import { useTaskContextSingle } from "../../contexts/contexts";
 import fetchData from "../../API/fetchData";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DashTaskPrev = () => {
   const { selectedTask, setTasks } = useTaskContextSingle();
   const [expandedTaskIds, setExpandedTaskIds] = useState([]);
+  const navigate = useNavigate();
 
   console.log("Selected Tasks:", selectedTask);
 
@@ -22,6 +24,12 @@ const DashTaskPrev = () => {
       );
     };
     changeTaskStatus(task);
+  };
+
+  const handleClickEdit = (task) => {
+    navigate(`/tasks/${task.id}/edit`, {
+      state: { taskToEdit: task },
+    });
   };
 
   return (
@@ -55,7 +63,10 @@ const DashTaskPrev = () => {
               >
                 <div className="w-1/3">{task.title}</div>
                 <div className="w-1/3">{task.deadline}</div>
-                <div className="w-1/3" onClick={(e) => e.stopPropagation()}>
+                <div
+                  className="w-1/3 flex justify-between items-center"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   {/* prevents from click-expanding at this point*/}
                   <select
                     name={`status-${task.id}`}
@@ -66,6 +77,12 @@ const DashTaskPrev = () => {
                     <option value="active">Active</option>
                     <option value="planned">Planned</option>
                   </select>
+                  <button
+                    className="p-button"
+                    onClick={() => handleClickEdit(task)}
+                  >
+                    Edit Mode
+                  </button>
                 </div>
               </div>
               {expandedTaskIds.includes(task.id) && <div>{task.content}</div>}

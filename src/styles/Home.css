@@ -19,8 +19,8 @@
 }
 
 .hero-fade-mask {
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
 }
 
 /* Basic header styles and basic footer styles come here */
@@ -97,5 +97,7 @@
   @apply rounded-full;
 }
 
-/* FOOTER */
-/* Container contains everything in the FOOTER */
+/* PROFILE */
+.account-card {
+  @apply bg-[#f3e8d9] rounded-2xl p-5 shadow-lg max-w-xl mx-auto mt-5;
+}

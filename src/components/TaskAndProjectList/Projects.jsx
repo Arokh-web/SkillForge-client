@@ -10,7 +10,7 @@ const Projects = () => {
   const navigate = useNavigate();
   const { setProjects, projects, loading, setSelectedProject } =
     useProjectContext();
-  const { tasks, taskCount } = useTaskContextSingle();
+  const { taskCount } = useTaskContextSingle();
   const [expandedDesc, setExpandedDesc] = useState({});
   const [expandedInfo, setExpandedInfo] = useState({});
 
@@ -67,7 +67,7 @@ const Projects = () => {
                 <h2 className="sub-title flex gap-5">
                   {project.title}
                   <div
-                    className={`${
+                    className={`font-mono text-xl ${
                       project.status === "active" || project.status === "Active"
                         ? "text-green-500"
                         : project.status === "planning" ||
@@ -97,42 +97,56 @@ const Projects = () => {
                       expandedInfo[project.id] ? "expanded" : "collapsed"
                     }`}
                   >
-                    <div className={"p-info-container"}>
-                      <p className="p-data-title">Priority: </p>
-                      <p
-                        className={`${
-                          project.priority === "low" ||
-                          project.priority === "Low"
-                            ? "text-green-400 font-bold"
-                            : project.priority === "medium" ||
-                              project.priority === "Medium"
-                            ? "text-yellow-600 font-bold"
-                            : project.priority === "high" ||
-                              project.priority === "High"
-                            ? "text-red-600 font-bold"
-                            : "text-gray-500 font-bold"
-                        }`}
-                      >
-                        {project.priority}
-                      </p>
-                      <p className="p-data-title">Associated Tasks: </p>
-                      <p>{taskCount[project.id] ?? "-"}</p>
-                    </div>
+                    <div className="flex flex-wrap gap-10 justify-between text-sm mt-2">
+                      <div className="flex flex-col gap-1 min-w-[120px]">
+                        <div className="flex gap-2">
+                          <p className="p-data-title">Priority:</p>
+                          <p
+                            className={`${
+                              project.priority === "low" ||
+                              project.priority === "Low"
+                                ? "text-green-400 font-bold"
+                                : project.priority === "medium" ||
+                                  project.priority === "Medium"
+                                ? "text-yellow-600 font-bold"
+                                : project.priority === "high" ||
+                                  project.priority === "High"
+                                ? "text-red-600 font-bold"
+                                : "text-gray-500 font-bold"
+                            }`}
+                          >
+                            {project.priority}
+                          </p>
+                        </div>
 
-                    <div className="p-meta-container">
-                      <p className="p-data-title">To be finished until: </p>
-                      <p>{project.deadline}</p>
-                      <p className="p-data-title">Last update: </p>
-                      <p>{project.updatedAt}</p>
-                      <p className="p-data-title">Date of Creation: </p>
-                      <p>{project.createdAt}</p>
+                        <div className="flex gap-2">
+                          <p className="p-data-title">Associated Tasks:</p>
+                          <p>{taskCount[project.id] ?? "-"}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-1 min-w-[180px]">
+                        <div className="flex gap-2">
+                          <p className="p-data-title">To be finished until:</p>
+                          <p>{project.deadline}</p>
+                        </div>
+                        <div className="flex gap-2">
+                          <p className="p-data-title">Last update:</p>
+                          <p>{project.updatedAt}</p>
+                        </div>
+                        <div className="flex gap-2">
+                          <p className="p-data-title">Date of Creation:</p>
+                          <p>{project.createdAt}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
+
                   {/* START of button container */}
-                  <div className="p-buttons-container itrems-center ">
+                  <div className="p-buttons-container w-full">
                     <button
                       name={`p-toggle-btn-${project.id}`}
-                      className={`p-button`}
+                      className={`p-button w-1/4`}
                       onClick={() => toggleDescExpand(project.id)}
                     >
                       {expandedDesc[project.id]
@@ -141,20 +155,20 @@ const Projects = () => {
                     </button>
                     <button
                       name={`p-info-toggle-btn-${project.id}`}
-                      className={`p-button`}
+                      className={`p-button w-1/4`}
                       onClick={() => toggleInfoExpand(project.id)}
                     >
-                      {expandedInfo[project.id] ? "Show Info" : "Hide Info"}
+                      {expandedInfo[project.id] ? "Hide Info" : "Show Info"}
                     </button>
 
                     <button
-                      className="p-button"
+                      className="p-button w-1/4"
                       onClick={() => handleClickEdit(project)}
                     >
                       Edit
                     </button>
                     <button
-                      className="p-button"
+                      className="p-button w-1/4"
                       onClick={(e) => handleClickDelete(project.id)}
                     >
                       Delete

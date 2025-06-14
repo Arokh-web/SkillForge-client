@@ -51,10 +51,12 @@ const CreateProject = () => {
       // clean the rawUpdateData to remove empty or undefined values (will be changed later)
       const cleanDataToUpdate = {};
       for (const key in rawUpdateData) {
+        //<-- rest of projectData
         const value = rawUpdateData[key];
         if (value !== "" && value !== undefined && value !== null) {
           cleanDataToUpdate[key] = value;
         }
+        // now cleanDataToUpdate will only contain fields that have values; all the others will be filled with the default values set by the DB
       }
 
       console.log("Updating project:", cleanDataToUpdate);
@@ -85,7 +87,7 @@ const CreateProject = () => {
         priority: "",
         pinned: false,
       });
-      setProjects((prevProjects) => [...prevProjects, response]);
+      setProjects((prev) => [...prev, response]);
     }
   };
 
@@ -138,9 +140,9 @@ const CreateProject = () => {
               <option value="" disabled>
                 Select Status
               </option>
-              <option value="Planning">Planning</option>
-              <option value="Active">Active</option>
-              <option value="On Hold">On Hold</option>
+              <option value="Planning">planning</option>
+              <option value="Active">active</option>
+              <option value="On Hold">on hold</option>
             </select>
           </div>
         </div>

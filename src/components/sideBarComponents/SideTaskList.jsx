@@ -43,6 +43,12 @@ const TaskList = () => {
 
   if (!tasks) return <div>Loading tasks...</div>;
 
+  const choosePointcolor = {
+    active: "🟡",
+    planned: "🔵",
+    done: "🟢",
+  };
+
   return (
     <div className="task-list-container">
       {tasks.map((task) => (
@@ -52,7 +58,8 @@ const TaskList = () => {
           onClick={() => handleSelect(task.id)}
         >
           <p>
-            U-ID {task.id}: {task.title}
+            U-ID {task.id}: {choosePointcolor[task?.status]}
+            {task.title}
           </p>
         </div>
       ))}

@@ -67,7 +67,7 @@
 
 .p-button {
   @apply flex items-center justify-center bg-gradient-to-r from-amber-400 to-yellow-600 font-semibold 
-  px-6 py-2 rounded-full shadow-md w-fit h-6
+  px-6 py-2 rounded-full shadow-md w-fit h-5
   hover:shadow-lg hover:from-amber-500 hover:to-yellow-700 transition-all duration-200;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .t-pin-button {
-  @apply ml-2 text-xl;
+  @apply text-inherit;
 }
 
 .t-card-body {

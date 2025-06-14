@@ -83,10 +83,23 @@ const CreateTaskorNote = () => {
 
   return (
     <div>
-      <h1 className="title">
-        Create a Task for <br></br>
-        <p className="text-red-800">{selectedProject.title}</p>
+      <h1 className="sub-title">
+        {isEditMode ? (
+          <>
+            <span className="font-mono text-xl">Edit </span>
+            <span>{taskData?.title}</span>
+            <span className="font-mono text-xl"> for project </span>
+            <span>{selectedProject?.title}</span>
+          </>
+        ) : (
+          <span className="font-mono">Create a Task</span>
+        )}
       </h1>
+
+      {!isEditMode && (
+        <p className="font-mono text-red-800">{selectedProject?.title}</p>
+      )}
+
       <form onSubmit={handleSubmit} className="create-task-container">
         <div className="field">
           <label className="form-tag">Title</label>

@@ -37,6 +37,7 @@ import {
   AuthProvider,
 } from "./contexts/contexts";
 import SignInUp from "./components/SignComponents/SignInUp.jsx";
+import AccProfile from "./pages/AccProfile.jsx";
 
 function App() {
   return (
@@ -50,6 +51,15 @@ function App() {
 
                 <Route path="signinup" element={<SignInUp />} />
                 {/* USER: PROTECTED AREA STARTS HERE */}
+
+                <Route
+                  path="profile"
+                  element={
+                    <UserProtectedRoute>
+                      <AccProfile />
+                    </UserProtectedRoute>
+                  }
+                />
 
                 <Route
                   path="dashboard"

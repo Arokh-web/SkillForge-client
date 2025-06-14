@@ -49,7 +49,7 @@ const DashGraph = () => {
 
     // And put it into the data array for the pie
     const data = {
-      labels: ["Active", "Done", "Planned"],
+      labels: ["Active", "Planned", "Done"],
       datasets: [
         {
           label: "Task Status",

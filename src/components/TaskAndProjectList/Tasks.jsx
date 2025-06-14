@@ -53,7 +53,7 @@ const Tasks = () => {
               <React.Fragment key={task.id}>
                 <div
                   className={`t-card ${
-                    task.completed_at
+                    task.priority === "none"
                       ? "bg-gray-200"
                       : task.priority === "high"
                       ? "bg-red-100"
@@ -102,7 +102,9 @@ const Tasks = () => {
                         <p className="t-data-title">Priority: </p>
                         <p
                           className={`${
-                            task.priority === "low"
+                            task.status === "done"
+                              ? "text-gray-500 font-bold"
+                              : task.priority === "low"
                               ? "text-green-400 font-bold"
                               : task.priority === "medium"
                               ? "text-yellow-600 font-bold"
@@ -111,7 +113,7 @@ const Tasks = () => {
                               : "text-gray-500 font-bold"
                           }`}
                         >
-                          {task.status === "done" ? "completed" : task.priority}
+                          {task.status === "done" ? "none" : task.priority}
                         </p>
                       </div>
 
@@ -119,8 +121,8 @@ const Tasks = () => {
                         <p className="t-data-title">Deadline: </p>
                         <p>{task.deadline}</p>
 
-                        <p className="t-data-title">Created: </p>
-                        <p>{task.created_at}</p>
+                        <p className="t-data-title">Created at: </p>
+                        <p>{task.createdAt}</p>
                         {task.completed_at && (
                           <>
                             <p className="t-data-title">Completed on: </p>
@@ -130,33 +132,33 @@ const Tasks = () => {
                       </div>
                     </div>
                   </div>
+                  <button
+                    className="t-pin-button"
+                    onClick={() => handlePinned(task, !task.pinned)}
+                  >
+                    {task.pinned ? "Unpin!" : "Pin!"}
+                  </button>
                   <div className="t-buttons-container">
                     <div className="flex gap-4">
                       <button
                         name={`t-toggle-btn-${task.id}`}
-                        className="t-button"
+                        className="p-button"
                         onClick={() => toggleDescExpand(task.id)}
                       >
-                        {expandedDesc[task.id] ? "Hide Desc" : "Show Desc"}
+                        {expandedDesc[task.id] ? "Hide" : "Full"}
                       </button>
 
                       <button
-                        className="t-edit-button"
+                        className="p-button"
                         onClick={() => handleClickEdit(task)}
                       >
                         Edit
                       </button>
                       <button
-                        className="t-delete-button"
+                        className="p-button"
                         onClick={() => handleClickDelete(task.id)}
                       >
                         Delete
-                      </button>
-                      <button
-                        className="t-pin-button"
-                        onClick={() => handlePinned(task, !task.pinned)}
-                      >
-                        {task.pinned ? "Unpin!" : "Pin!"}
                       </button>
                     </div>
                   </div>
