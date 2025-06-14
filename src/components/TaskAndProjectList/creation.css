@@ -20,5 +20,5 @@
 }
 
 .creation-input {
-  @apply text-black  w-50;
+  @apply text-black  w-fit;
 }

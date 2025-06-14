@@ -154,7 +154,7 @@ const CreateProject = () => {
               className="input creation-input"
               type="date"
               name="deadline"
-              value={projectData.deadline}
+              value={projectData.deadline.slice(0, 10) || ""}
               onChange={handleChange}
             />
           </div>

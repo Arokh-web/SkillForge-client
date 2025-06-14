@@ -119,7 +119,7 @@ const Tasks = () => {
 
                       <div className="t-meta-container justify-between">
                         <p className="t-data-title">Deadline: </p>
-                        <p>{task.deadline}</p>
+                        <p>{task.deadline.slice(0, 10) || ""}</p>
 
                         <p className="t-data-title">Created at: </p>
                         <p>{task.createdAt}</p>

@@ -1,18 +1,30 @@
 // This is the upper menu bar, where the logo, the title of the current page, dark-mode-switch, logout-button and account-button exist
 import { Link } from "react-router-dom";
-import { useAuthContext } from "../contexts/contexts";
+import {
+  useAuthContext,
+  useProjectContext,
+  useTaskContextSingle,
+} from "../contexts/contexts";
 import { useNavigate } from "react-router-dom";
 import fetchData from "../API/fetchData";
 
 const Header = () => {
   // const [darkMode, setDarkMode] = useState(false);
-  const { user, setUser, isAuthenticated } = useAuthContext();
+  const { user, setUser, isAuthenticated, setIsAuthenticated } =
+    useAuthContext();
+  const { setProjects, setSelectedProject } = useProjectContext();
+  const { setTasks } = useTaskContextSingle();
   const navigate = useNavigate();
 
   const handleClickLogout = async () => {
     await fetchData("POST", "/auth/signout");
     // Clear user state and navigate to signinup page
     setUser(null);
+    setIsAuthenticated(false);
+    setProjects([]);
+    setTasks([]);
+    setSelectedProject(null);
+
     navigate("signinup");
   };
 

@@ -51,7 +51,14 @@ const CreateTaskorNote = () => {
     }
 
     if (isEditMode) {
-      const { id, ...updatedTaskData } = taskData;
+      const {
+        id,
+        updatedAt,
+        createdAt,
+        completed_at,
+        selected,
+        ...updatedTaskData
+      } = taskData;
       const res = await fetchData(
         "PUT",
         `/api/tasks/${taskData.id}`,
@@ -141,9 +148,9 @@ const CreateTaskorNote = () => {
               <option value="" disabled>
                 Select Status
               </option>
-              <option value="Planning">Planning</option>
-              <option value="Active">Active</option>
-              <option value="On Hold">On Hold</option>
+              <option value="planning">Planning</option>
+              <option value="active">Active</option>
+              <option value="on hold">On Hold</option>
             </select>
           </div>
         </div>
@@ -155,7 +162,7 @@ const CreateTaskorNote = () => {
               className="input creation-input"
               type="date"
               name="deadline"
-              value={taskData.deadline}
+              value={taskData.deadline.slice(0, 10) || ""}
               onChange={handleChange}
             />
           </div>
@@ -174,9 +181,9 @@ const CreateTaskorNote = () => {
               <option value="" disabled>
                 Select Priority
               </option>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
             </select>
           </div>
         </div>
@@ -196,7 +203,7 @@ const CreateTaskorNote = () => {
         </div>
         {errorMessage && <span className="text-red-700">{errorMessage}</span>}
         <button type="submit" className="sign-button">
-          Create Task
+          {isEditMode ? "Edit " : "Create "}Task
         </button>
       </form>
     </div>

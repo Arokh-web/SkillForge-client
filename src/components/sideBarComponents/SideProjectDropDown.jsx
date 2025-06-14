@@ -31,7 +31,7 @@ const ProjectDropDown = () => {
   return (
     <div className="project-dropdown-container">
       {loading ? (
-        <p>Loading...</p>
+        <p>Create a project first!</p>
       ) : (
         <div>
           <select

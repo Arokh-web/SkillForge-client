@@ -38,6 +38,7 @@ export const ProjectProvider = ({ children }) => {
         ...project,
         selected: false,
       }));
+      console.log("Fetched projects:", projects);
       setProjects(projects);
       setLoading(false);
     };

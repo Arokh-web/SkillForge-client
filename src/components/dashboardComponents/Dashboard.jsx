@@ -21,9 +21,14 @@ const Dashboard = () => {
       <p>You can also fast-create new projects, tasks, and notes from here.</p>
 
       <div className="flex m-5 gap-25">
-        {selectedProject && <DashGraph />} <DashProjectPrev />
+        {selectedProject && (
+          <>
+            <DashGraph />
+            <DashProjectPrev />
+          </>
+        )}
       </div>
-      <DashTaskPrev />
+      {selectedProject && <DashTaskPrev />}
     </div>
   );
 };
